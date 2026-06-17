@@ -108,10 +108,11 @@
       </div>
     </div>
     <div class="wa-msg-area">
-      <div class="wa-msg-hdr"><span>✏️ نص رسالة واتساب <small style="color:var(--muted);font-weight:400">استخدم {name} لاسم المطعم</small></span></div>
+      <div class="wa-msg-hdr"><span>✏️ نص رسالة واتساب <small style="color:var(--muted);font-weight:400">{name}=اسم المطعم · {link}=رابط الصفحة</small></span></div>
       <textarea id="waMsgInput" onchange="saveWaMsg()" placeholder="اكتب نص الرسالة...">مرحباً {name}،
 
 نقدم لكم إنشاء صفحة هبوط إلكترونية لمطعمكم بمنيو تفاعلي وسلة طلب وواتساب مباشر ولوحة تحكم، بسعر 100 ريال فقط!
+شاهد المثال الحي: {link}
 جربوا لوحة التحكم: اضغط "إدارة" في أسفل الصفحة وأدخل 1122.</textarea>
     </div>
     <div id="restList"></div>
@@ -167,8 +168,8 @@
       localStorage.setItem('broastWorkshop', JSON.stringify(restaurants));
     }
 
-    function makeWhatsAppLink(phone, name) {
-      const msg = (localStorage.getItem('broastWaMsg') || defaultWaMsg).replace(/{name}/g, name);
+    function makeWhatsAppLink(phone, name, pageUrl) {
+      const msg = (localStorage.getItem('broastWaMsg') || defaultWaMsg).replace(/{name}/g, name).replace(/{link}/g, pageUrl);
       return `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
     }
 
@@ -291,7 +292,8 @@
         `;
         const menuLink = r.hasMenu ? `<a href="${r.menuFile}" class="btn-menu">📋 المنيو</a>` : `<a href="menu.html?id=${r.id}" class="btn-menu">📋 المنيو</a>`;
         const copyLinkBtn = `<button class="btn-copy" onclick="copyLink('${r.id}',this)" title="نسخ رابط الصفحة">📎</button>`;
-        const waLink = `<a href="${makeWhatsAppLink(r.phone, r.name)}" target="_blank" class="btn-wa">💬 واتساب</a>`;
+        const pageUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + (r.hasMenu ? r.menuFile : 'menu.html?id=' + r.id);
+        const waLink = `<a href="${makeWhatsAppLink(r.phone, r.name, pageUrl)}" target="_blank" class="btn-wa">💬 واتساب</a>`;
         const mapLink = r.mapsLink ? `<a href="${r.mapsLink}" target="_blank" class="btn-map">📍 خرائط</a>` : `<a href="${makeMapsLink(r.mapsQuery)}" target="_blank" class="btn-map">📍 خرائط</a>`;
         const cls = r._new ? 'rest-card new-row' : 'rest-card';
         return `<div class="${cls}">
