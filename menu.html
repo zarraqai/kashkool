@@ -401,7 +401,7 @@
         </div>
         <div class="footer">${store.name} — المدينة المنورة 2026 · <span style="cursor:pointer" onclick="showPwd()">إدارة</span></div>
       `;
-      document.getElementById('whatsappFloat').href = 'https://wa.me/' + store.phone;
+      (function(){ var base='https://zarraqai.github.io/kashkool/'; var link=base+store.id+'.html'; var msg=localStorage.getItem('broastWaMsg'); if(!msg){msg='مرحباً {name}،\n\nنقدم لكم إنشاء صفحة هبوط إلكترونية لمطعمكم بمنيو تفاعلي وسلة طلب وواتساب مباشر ولوحة تحكم، بسعر 100 ريال فقط!\nشاهد المثال الحي: {link}\nجربوا لوحة التحكم: اضغط "إدارة" في أسفل الصفحة وأدخل 1122.';} var finalMsg=msg.replace(/\{name\}/g,store.name).replace(/\{link\}/g,link); document.getElementById('whatsappFloat').href='https://wa.me/'+store.phone+'?text='+encodeURIComponent(finalMsg); })();
       renderMenu();
     }
     function renderMenu() {

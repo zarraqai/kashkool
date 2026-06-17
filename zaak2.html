@@ -150,7 +150,7 @@
   <div class="container" id="pageContent">
     <div class="loading" id="loadingMsg">جاري تحميل المنيو...</div>
   </div>
-  <a class="whatsapp-float" href="https://wa.me/966506991835" target="_blank">💬 واتساب</a>
+  <a class="whatsapp-float" href="#" target="_blank" id="waFloat">💬 واتساب</a>
   <button class="cart-fab" id="cartFab" onclick="toggleCart()"><span>🛒</span> طلبي <span class="badge" id="cartBadge">0</span></button>
   <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
   <div class="cart-bar" id="cartBar">
@@ -270,6 +270,18 @@
     function sAv(){localStorage.setItem('menuEdit_zaak2',JSON.stringify(_ed));menuData.length=0;menuData.push(..._ed);renderMenu();closeAdmin()}
     function rSt(){if(confirm('استعادة المنيو الافتراضي؟')){localStorage.removeItem('menuEdit_zaak2');location.reload()}}
     init();
+  
+  (function(){
+    var base = 'https://zarraqai.github.io/kashkool/';
+    var link = base + store.id + '.html';
+    var msg = localStorage.getItem('broastWaMsg');
+    if (!msg) {
+      msg = 'مرحباً {name}،\n\nنقدم لكم إنشاء صفحة هبوط إلكترونية لمطعمكم بمنيو تفاعلي وسلة طلب وواتساب مباشر ولوحة تحكم، بسعر 100 ريال فقط!\nشاهد المثال الحي: {link}\nجربوا لوحة التحكم: اضغط "إدارة" في أسفل الصفحة وأدخل 1122.';
+    }
+    var finalMsg = msg.replace(/{name}/g, store.name).replace(/{link}/g, link);
+    document.querySelector('.whatsapp-float').href = 'https://wa.me/' + store.phone + '?text=' + encodeURIComponent(finalMsg);
+  })();
+
   </script>
 </body>
 </html>
