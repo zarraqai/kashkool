@@ -168,8 +168,9 @@
       localStorage.setItem('broastWorkshop', JSON.stringify(restaurants));
     }
 
+    const baseUrl = 'https://zarraqai.github.io/kashkool/';
     function makeWhatsAppLink(phone, name, pageUrl) {
-      const msg = (localStorage.getItem('broastWaMsg') || defaultWaMsg).replace(/{name}/g, name).replace(/{link}/g, pageUrl);
+      const msg = (localStorage.getItem('broastWaMsg') || defaultWaMsg).replace(/{name}/g, name).replace(/{link}/g, baseUrl + pageUrl);
       return `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
     }
 
@@ -292,8 +293,8 @@
         `;
         const menuLink = r.hasMenu ? `<a href="${r.menuFile}" class="btn-menu">📋 المنيو</a>` : `<a href="menu.html?id=${r.id}" class="btn-menu">📋 المنيو</a>`;
         const copyLinkBtn = `<button class="btn-copy" onclick="copyLink('${r.id}',this)" title="نسخ رابط الصفحة">📎</button>`;
-        const pageUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + (r.hasMenu ? r.menuFile : 'menu.html?id=' + r.id);
-        const waLink = `<a href="${makeWhatsAppLink(r.phone, r.name, pageUrl)}" target="_blank" class="btn-wa">💬 واتساب</a>`;
+        const relUrl = r.hasMenu ? r.menuFile : 'menu.html?id=' + r.id;
+        const waLink = `<a href="${makeWhatsAppLink(r.phone, r.name, relUrl)}" target="_blank" class="btn-wa">💬 واتساب</a>`;
         const mapLink = r.mapsLink ? `<a href="${r.mapsLink}" target="_blank" class="btn-map">📍 خرائط</a>` : `<a href="${makeMapsLink(r.mapsQuery)}" target="_blank" class="btn-map">📍 خرائط</a>`;
         const cls = r._new ? 'rest-card new-row' : 'rest-card';
         return `<div class="${cls}">
