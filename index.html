@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ورشة التسويق — مطاعم البروست | المدينة المنورة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary: #c0392b; --green: #27ae60; --red: #e74c3c; --gray: #95a5a6; --bg: #f0ebe4; --card: #fff; --text: #2d2d2d; --muted: #888; --shadow: 0 2px 12px rgba(0,0,0,0.06); --radius: 12px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); padding: 0; }
+    .header { background: linear-gradient(135deg, #1a1a2e 0%, #c0392b 100%); color: #fff; padding: 28px 20px 24px; text-align: center; }
+    .header h1 { font-size: 1.6em; font-weight: 900; }
+    .header p { font-size: 0.85em; opacity: .8; margin-top: 4px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 16px; }
+    .stats-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .stat-box { flex: 1; min-width: 60px; background: var(--card); border-radius: var(--radius); padding: 12px; text-align: center; box-shadow: var(--shadow); }
+    .stat-box .num { font-size: 1.3em; font-weight: 900; }
+    .stat-box .lbl { font-size: 0.72em; color: var(--muted); margin-top: 2px; }
+    .stat-box.total .num { color: var(--primary); }
+    .stat-box.pending .num { color: var(--gray); }
+    .stat-box.contacted .num { color: var(--green); }
+    .stat-box.rejected .num { color: var(--red); }
+    .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+    .filter-btn { padding: 7px 16px; border-radius: 30px; border: none; font-family: inherit; font-size: 0.82em; font-weight: 700; cursor: pointer; transition: .15s; background: var(--card); color: var(--text); box-shadow: var(--shadow); }
+    .filter-btn:hover { transform: translateY(-1px); }
+    .filter-btn.active { background: var(--primary); color: #fff; }
+    .filter-btn.active-all { background: var(--primary); color: #fff; }
+    .filter-btn.active-pending { background: var(--gray); color: #fff; }
+    .filter-btn.active-contacted { background: var(--green); color: #fff; }
+    .filter-btn.active-rejected { background: var(--red); color: #fff; }
+    .search-bar { width: 100%; padding: 10px 16px; border-radius: var(--radius); border: none; font-family: inherit; font-size: 0.9em; box-shadow: var(--shadow); margin-bottom: 14px; background: var(--card); }
+    .add-area { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; margin-bottom: 16px; }
+    .add-area h3 { font-size: 0.95em; color: var(--primary); margin-bottom: 10px; }
+    .add-form { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .add-form input { padding: 8px 12px; border-radius: 8px; border: 1px solid #e0dcd6; font-family: inherit; font-size: 0.85em; }
+    .add-form input:focus { outline: none; border-color: var(--primary); }
+    .add-form .full { grid-column: 1 / -1; }
+    .add-form .btn-add { grid-column: 1 / -1; padding: 10px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-weight: 700; font-family: inherit; font-size: 0.9em; cursor: pointer; transition: .15s; }
+    .add-form .btn-add:hover { background: #a93226; }
+    .rest-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; transition: .15s; }
+    .rest-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .rest-card .num { width: 24px; text-align: center; color: var(--muted); font-size: 0.78em; font-weight: 700; flex-shrink: 0; }
+    .rest-card .info { flex: 1; min-width: 0; }
+    .rest-card .name { font-weight: 700; font-size: 0.92em; }
+    .rest-card .meta { font-size: 0.75em; color: var(--muted); margin-top: 1px; }
+    .rest-card .meta .dot { margin: 0 4px; }
+    .rest-card .rating { color: #f39c12; font-size: 0.88em; white-space: nowrap; }
+    .rest-card .actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .rest-card .actions .btn-sm { width: 30px; height: 30px; border-radius: 50%; border: none; font-size: 0.85em; cursor: pointer; transition: .12s; display: flex; align-items: center; justify-content: center; font-family: inherit; }
+    .rest-card .actions .btn-sm:hover { transform: scale(1.1); }
+    .btn-contact { background: #eafaf1; color: var(--green); }
+    .btn-contact.done { background: var(--green); color: #fff; }
+    .btn-reject { background: #fdedec; color: var(--red); }
+    .btn-reject.done { background: var(--red); color: #fff; }
+    .btn-pending { background: #f2f2f2; color: var(--gray); }
+    .btn-menu { background: #eef2f7; color: #2980b9; text-decoration: none; font-size: 0.75em; padding: 4px 8px; border-radius: 6px; font-weight: 700; white-space: nowrap; }
+    .btn-menu:hover { background: #2980b9; color: #fff; }
+    .btn-wa { background: #e8f5e9; color: #25D366; text-decoration: none; font-size: 0.75em; padding: 4px 8px; border-radius: 6px; font-weight: 700; white-space: nowrap; }
+    .btn-wa:hover { background: #25D366; color: #fff; }
+    .btn-copy { background: #f3e5f5; color: #8e24aa; text-decoration: none; font-size: 0.75em; padding: 4px 8px; border-radius: 6px; font-weight: 700; white-space: nowrap; cursor: pointer; border: none; font-family: inherit; transition: .12s; }
+    .btn-copy:hover { background: #8e24aa; color: #fff; }
+    .btn-copy.copied { background: var(--green); color: #fff; }
+    .btn-map { background: #e8eaf6; color: #4285F4; text-decoration: none; font-size: 0.75em; padding: 4px 8px; border-radius: 6px; font-weight: 700; white-space: nowrap; }
+    .btn-map:hover { background: #4285F4; color: #fff; }
+    .btn-delete { background: transparent; color: #ddd; font-size: 0.9em; }
+    .btn-delete:hover { color: var(--red); }
+    .rest-card.deleted { display: none; }
+    .rest-card.new-row { border-right: 3px solid var(--green); }
+    .rest-card.filtered-out { display: none; }
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 0.9em; }
+    .footer { text-align: center; padding: 20px; color: var(--muted); font-size: 0.78em; }
+    @media (max-width: 600px) {
+      .add-form { grid-template-columns: 1fr; }
+      .rest-card { flex-wrap: wrap; }
+      .rest-card .actions { width: 100%; justify-content: flex-end; margin-top: 4px; }
+      .stats-row .stat-box { min-width: 45px; padding: 8px; }
+      .stat-box .num { font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>ورشة التسويق — مطاعم البروست</h1>
+    <p>المدينة المنورة | تابع حالة المراسلة مع المحلات</p>
+  </div>
+  <div class="container" id="app">
+    <div class="stats-row" id="statsRow"></div>
+    <div class="filters" id="filtersRow"></div>
+    <input class="search-bar" id="searchInput" placeholder="🔍 بحث عن محل..." oninput="render()">
+    <div class="add-area">
+      <h3>➕ إضافة محل جديد</h3>
+      <div class="add-form">
+        <input id="addName" placeholder="اسم المحل">
+        <input id="addPhone" placeholder="رقم الجوال (05XXXXXXXX)">
+        <input id="addRating" placeholder="التقييم (4.3)">
+        <input id="addArea" placeholder="المنطقة/الحي">
+        <input class="full" id="addLink" placeholder="رابط خرائط جوجل (اختياري)">
+        <button class="btn-add" onclick="addRestaurant()">إضافة المحل</button>
+      </div>
+    </div>
+    <div id="restList"></div>
+    <div class="footer">ورشة التسويق — مطاعم البروست في المدينة المنورة 2026</div>
+  </div>
+  <script>
+    const defaultRestaurants = [
+      { id:'sara', name:'بروست سارة', phone:'966540230888', rating:4.8, area:'8 فروع—العزيزية، الهجرة، الجرف وأكثر', mapsQuery:'بروست+سارة+المدينة+المنورة', hasMenu:true, menuFile:'sara.html' },
+      { id:'basheer', name:'مطاعم البشير — بروست', phone:'966148235190', rating:4.2, area:'طريق الملك عبدالعزيز — طريق المطار', mapsQuery:'مطاعم+البشير+بروست+المدينة+المنورة', hasMenu:true, menuFile:'basheer.html' },
+      { id:'mrbroast', name:'مستر بروست MR.Broast', phone:'966554892026', rating:4.3, area:'بني حارثة — حي النصر', mapsQuery:'مستر+بروست+المدينة+المنورة', hasMenu:true, menuFile:'mrbroast.html' },
+      { id:'safwa', name:'بروست الصفوة', phone:'966553239010', rating:4.5, area:'سكة الحديد (العنابس) — الدائري الثاني', mapsQuery:'بروست+الصفوة+العنابس+المدينة', hasMenu:true, menuFile:'safwa.html' },
+      { id:'raheeb', name:'بروست الرهيب', phone:'966542410117', rating:4.3, area:'حي البركة — السكة الحديد', mapsQuery:'بروست+الرهيب+المدينة+المنورة', hasMenu:true, menuFile:'raheeb.html' },
+      { id:'zadway', name:'بروست زاد واي', phone:'966500917101', rating:4.1, area:'الزهرة — الراية — مهزوز', mapsQuery:'بروست+زاد+واي+المدينة', hasMenu:true, menuFile:'zadway.html' },
+      { id:'brostich', name:'بروستيش Broastich', phone:'966555847331', rating:4.5, area:'الاصيفرين', mapsQuery:'بروستيش+المدينة+المنورة', hasMenu:true, menuFile:'brostich.html' },
+      { id:'taj', name:'بروست تاج الفروج', phone:'966538205828', rating:4.0, area:'شوران', mapsQuery:'بروست+تاج+الفروج+المدينة', hasMenu:true, menuFile:'taj.html' },
+      { id:'tahlya', name:'بروست التحليه (الدفاع)', phone:'966563063016', rating:4.4, area:'الدفاع', mapsQuery:'بروست+التحليه+الدفاع+المدينة', hasMenu:true, menuFile:'tahlya.html' },
+      { id:'chickiz1', name:'بروست تشيكيز (الخالدية)', phone:'966560062309', rating:4.9, area:'الخالدية', mapsQuery:'بروست+تشيكيز+الخالدية+المدينة', hasMenu:true, menuFile:'chickiz1.html' },
+      { id:'chickiz2', name:'بروست تشيكيز (الهجرة)', phone:'966544948826', rating:5.0, area:'ممشى الهجرة', mapsQuery:'بروست+تشيكيز+الهجرة+المدينة', hasMenu:true, menuFile:'chickiz2.html' },
+      { id:'zaak1', name:'زاك بروست (الخالدية)', phone:'966538107275', rating:4.5, area:'الخالدية', mapsQuery:'زاك+بروست+الخالدية+المدينة', hasMenu:true, menuFile:'zaak1.html' },
+      { id:'zaak2', name:'زاك بروست (العزيزية)', phone:'966506991835', rating:4.6, area:'العزيزية', mapsQuery:'زاك+بروست+العزيزية+المدينة', hasMenu:true, menuFile:'zaak2.html' },
+      { id:'hara', name:'Al Hara Broast', phone:'966559051189', rating:4.2, area:'طريق المطار', mapsQuery:'Al+Hara+Broast+Madinah', hasMenu:true, menuFile:'hara.html' },
+      { id:'alyoum', name:'بروست اليوم', phone:'966557671345', rating:4.3, area:'Ar Rawabi', mapsQuery:'بروست+اليوم+المدينة', hasMenu:true, menuFile:'alyoum.html' },
+      { id:'katakeet', name:'بروست كتاكيت', phone:'96659796180', rating:4.3, area:'قربان', mapsQuery:'بروست+كتاكيت+المدينة', hasMenu:true, menuFile:'katakeet.html' },
+      { id:'frooji', name:'بروست فروجي (الدفاع)', phone:'966557703374', rating:4.3, area:'الدفاع', mapsQuery:'بروست+فروجي+الدفاع+المدينة', hasMenu:true, menuFile:'frooji.html' },
+      { id:'habaka', name:'حبكة البروست البلدي', phone:'966561202852', rating:4.4, area:'الفتح', mapsQuery:'حبكة+البروست+البلدي+المدينة', hasMenu:true, menuFile:'habaka.html' },
+      { id:'broastone', name:'بروست ون', phone:'966545834589', rating:3.8, area:'الملك فهد', mapsQuery:'بروست+ون+المدينة', hasMenu:true, menuFile:'broastone.html' },
+      { id:'safa', name:'الصفا بروست', phone:'966580147028', rating:4.2, area:'العريض', mapsQuery:'الصفا+بروست+المدينة', hasMenu:true, menuFile:'safa.html' },
+      { id:'baladi', name:'البروست البلدي', phone:'966541422606', rating:4.4, area:'مدبنب', mapsQuery:'البروست+البلدي+المدينة', hasMenu:true, menuFile:'baladi.html' },
+      { id:'sultana', name:'بروست سلطانه', phone:'966541404774', rating:4.8, area:'العيون', mapsQuery:'بروست+سلطانه+المدينة', hasMenu:true, menuFile:'sultana.html' },
+      { id:'mstrfrj', name:'بروست مستر فروج', phone:'966566820175', rating:4.8, area:'الجمعة', mapsQuery:'بروست+مستر+فروج+المدينة', hasMenu:true, menuFile:'mstrfrj.html' },
+      { id:'sos', name:'بروست صوص الفروج', phone:'966552991129', rating:4.3, area:'الجابرة', mapsQuery:'بروست+صوص+الفروج+المدينة', hasMenu:true, menuFile:'sos.html' },
+      { id:'mazak', name:'بروست مذاق الدجاج', phone:'966591236603', rating:4.9, area:'عروة', mapsQuery:'بروست+مذاق+الدجاج+المدينة', hasMenu:true, menuFile:'mazak.html' },
+    ];
+
+    let restaurants = [];
+    let currentFilter = 'all';
+
+    function loadData() {
+      const saved = localStorage.getItem('broastWorkshop');
+      if (saved) {
+        restaurants = JSON.parse(saved);
+        restaurants = restaurants.map(r => { const d = defaultRestaurants.find(x => x.id === r.id); return d ? { ...d, ...r } : r; });
+      } else {
+        restaurants = defaultRestaurants.map(r => ({ ...r, status: 'pending', deleted: false }));
+      }
+    }
+
+    function saveData() {
+      localStorage.setItem('broastWorkshop', JSON.stringify(restaurants));
+    }
+
+    function makeWhatsAppLink(phone) {
+      return `https://wa.me/${phone}`;
+    }
+
+    function makeMapsLink(query) {
+      return `https://www.google.com/maps/search/${query}`;
+    }
+
+    function formatPhone(phone) {
+      if (phone.startsWith('966')) return '0' + phone.slice(3);
+      return phone;
+    }
+
+    function setStatus(id, status) {
+      const r = restaurants.find(x => x.id === id);
+      if (!r) return;
+      if (r.status === status) r.status = 'pending';
+      else r.status = status;
+      saveData();
+      render();
+    }
+
+    function deleteRestaurant(id) {
+      if (!confirm('حذف هذا المحل؟')) return;
+      const r = restaurants.find(x => x.id === id);
+      if (r) r.deleted = true;
+      saveData();
+      render();
+    }
+
+    function getStats() {
+      const total = restaurants.filter(r => !r.deleted).length;
+      const pending = restaurants.filter(r => !r.deleted && r.status === 'pending').length;
+      const contacted = restaurants.filter(r => !r.deleted && r.status === 'contacted').length;
+      const rejected = restaurants.filter(r => !r.deleted && r.status === 'rejected').length;
+      return { total, pending, contacted, rejected };
+    }
+
+    function getStars(rating) {
+      const full = Math.floor(rating);
+      const half = rating - full >= 0.5 ? 1 : 0;
+      return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(Math.max(0, 5 - full - half));
+    }
+
+    function copyLink(id, btn) {
+      const r = restaurants.find(x => x.id === id);
+      if (!r) return;
+      const url = r.hasMenu ? r.menuFile : 'menu.html?id=' + r.id;
+      const fullUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + url;
+      navigator.clipboard.writeText(fullUrl).then(() => {
+        btn.textContent = '✅'; btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = '📎'; btn.classList.remove('copied'); }, 2000);
+      }).catch(() => { prompt('انسخ الرابط:', fullUrl); });
+    }
+    function addRestaurant() {
+      const name = document.getElementById('addName').value.trim();
+      const phoneRaw = document.getElementById('addPhone').value.trim();
+      const rating = parseFloat(document.getElementById('addRating').value.trim());
+      const area = document.getElementById('addArea').value.trim();
+      const link = document.getElementById('addLink').value.trim();
+      if (!name || !phoneRaw || !rating || !area) { alert('يرجى تعبئة جميع الحقول الأساسية'); return; }
+      let phone = phoneRaw.replace(/[^0-9]/g, '');
+      if (phone.startsWith('966')) { /* ok */ }
+      else if (phone.startsWith('05')) phone = '966' + phone.slice(1);
+      else if (phone.startsWith('5')) phone = '966' + phone;
+      else { alert('رقم جوال غير صحيح'); return; }
+      const id = 'cust_' + Date.now();
+      const mapsQuery = encodeURIComponent(name + ' ' + area + ' المدينة المنورة');
+      const r = { id, name, phone, rating, area, mapsQuery, hasMenu: false, status: 'pending', deleted: false, _new: true };
+      if (link) r.mapsLink = link;
+      restaurants.push(r);
+      saveData();
+      document.getElementById('addName').value = '';
+      document.getElementById('addPhone').value = '';
+      document.getElementById('addRating').value = '';
+      document.getElementById('addArea').value = '';
+      document.getElementById('addLink').value = '';
+      render();
+    }
+
+    function render() {
+      const search = document.getElementById('searchInput').value.trim().toLowerCase();
+      const filtered = restaurants.filter(r => {
+        if (r.deleted) return false;
+        if (currentFilter !== 'all' && r.status !== currentFilter) return false;
+        if (search && !r.name.toLowerCase().includes(search) && !r.area.toLowerCase().includes(search)) return false;
+        return true;
+      });
+
+      // Stats
+      const stats = getStats();
+      document.getElementById('statsRow').innerHTML = `
+        <div class="stat-box total"><div class="num">${stats.total}</div><div class="lbl">إجمالي</div></div>
+        <div class="stat-box pending"><div class="num">${stats.pending}</div><div class="lbl">لم يتم</div></div>
+        <div class="stat-box contacted"><div class="num">${stats.contacted}</div><div class="lbl">تمت المراسلة</div></div>
+        <div class="stat-box rejected"><div class="num">${stats.rejected}</div><div class="lbl">رفض</div></div>
+      `;
+
+      // Filters
+      const filters = [
+        { key: 'all', label: 'الكل' },
+        { key: 'pending', label: '⏳ لم يتم' },
+        { key: 'contacted', label: '✅ تمت المراسلة' },
+        { key: 'rejected', label: '❌ رفض' },
+      ];
+      document.getElementById('filtersRow').innerHTML = filters.map(f =>
+        `<button class="filter-btn ${currentFilter === f.key ? 'active-' + f.key : ''}" onclick="setFilter('${f.key}')">${f.label}</button>`
+      ).join('');
+
+      // List
+      const list = document.getElementById('restList');
+      if (filtered.length === 0) {
+        list.innerHTML = '<div class="empty-state">لا توجد محلات لعرضها</div>';
+        return;
+      }
+      list.innerHTML = filtered.map((r, i) => {
+        const stars = getStars(r.rating);
+        const statusBtns = `
+          <button class="btn-sm ${r.status === 'contacted' ? 'btn-contact done' : 'btn-pending'}" onclick="setStatus('${r.id}','contacted')" title="تمت المراسلة">${r.status === 'contacted' ? '✓' : '○'}</button>
+          <button class="btn-sm ${r.status === 'rejected' ? 'btn-reject done' : 'btn-pending'}" onclick="setStatus('${r.id}','rejected')" title="رفض العرض">${r.status === 'rejected' ? '✗' : '—'}</button>
+        `;
+        const menuLink = r.hasMenu ? `<a href="${r.menuFile}" class="btn-menu">📋 المنيو</a>` : `<a href="menu.html?id=${r.id}" class="btn-menu">📋 المنيو</a>`;
+        const copyLinkBtn = `<button class="btn-copy" onclick="copyLink('${r.id}',this)" title="نسخ رابط الصفحة">📎</button>`;
+        const waLink = `<a href="${makeWhatsAppLink(r.phone)}" target="_blank" class="btn-wa">💬 واتساب</a>`;
+        const mapLink = r.mapsLink ? `<a href="${r.mapsLink}" target="_blank" class="btn-map">📍 خرائط</a>` : `<a href="${makeMapsLink(r.mapsQuery)}" target="_blank" class="btn-map">📍 خرائط</a>`;
+        const cls = r._new ? 'rest-card new-row' : 'rest-card';
+        return `<div class="${cls}">
+          <div class="num">${i + 1}</div>
+          <div class="info">
+            <div class="name">${r.name}</div>
+            <div class="meta"><span class="rating">${stars} ${r.rating}</span><span class="dot">·</span>${formatPhone(r.phone)}<span class="dot">·</span>${r.area}</div>
+          </div>
+          <div class="actions">
+            ${statusBtns}
+            ${menuLink}
+            ${copyLinkBtn}
+            ${waLink}
+            ${mapLink}
+            <button class="btn-sm btn-delete" onclick="deleteRestaurant('${r.id}')" title="حذف">🗑️</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function setFilter(key) {
+      currentFilter = key;
+      render();
+    }
+
+    loadData();
+    render();
+  </script>
+</body>
+</html>

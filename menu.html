@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>المنيو — طلب أونلاين | المدينة المنورة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary: #c0392b; --accent: #e74c3c; --whatsapp: #25D366; --bg: #f5f0eb; --card: #fff; --text: #2d2d2d; --muted: #888; --radius: 16px; --header-h: 200px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 90px; overflow-x: hidden; }
+    .header {
+      position: relative; min-height: var(--header-h); display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #0f0c29 0%, #1a1a2e 35%, #c0392b 70%, #e74c3c 100%);
+      color: #fff; padding: 40px 20px 32px; text-align: center; overflow: hidden;
+    }
+    .header::after {
+      content: ''; position: absolute; top: -40%; right: -20%; width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); border-radius: 50%;
+    }
+    .header .deco {
+      position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; overflow: hidden;
+    }
+    .header .deco span {
+      position: absolute; width: 12px; height: 12px; background: rgba(255,255,255,0.05); border-radius: 50%;
+      animation: floatUp 8s ease-in-out infinite;
+    }
+    .header .deco span:nth-child(1) { left: 15%; bottom: 10%; animation-delay: 0s; width: 16px; height: 16px; }
+    .header .deco span:nth-child(2) { left: 40%; bottom: 20%; animation-delay: 2.5s; width: 10px; height: 10px; }
+    .header .deco span:nth-child(3) { left: 70%; bottom: 5%; animation-delay: 5s; width: 14px; height: 14px; }
+    .header .deco span:nth-child(4) { left: 85%; bottom: 30%; animation-delay: 1.2s; width: 8px; height: 8px; }
+    .header .deco span:nth-child(5) { left: 25%; bottom: 40%; animation-delay: 3.8s; width: 6px; height: 6px; }
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+      50% { transform: translateY(-120px) scale(0.5); opacity: 0; }
+    }
+    .header h1 { font-size: 2em; font-weight: 900; position: relative; z-index: 2; text-shadow: 0 2px 20px rgba(0,0,0,0.3); line-height: 1.3; }
+    .header .sub { font-size: 0.95em; opacity: .9; margin-top: 6px; position: relative; z-index: 2; text-shadow: 0 1px 10px rgba(0,0,0,0.2); }
+    .container { max-width: 960px; margin: 0 auto; padding: 16px; }
+    .top-bar { background: var(--card); border-radius: var(--radius); padding: 16px 20px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-content: space-between; margin-bottom: 20px; }
+    .top-bar .rating { color: #f39c12; font-size: 1em; }
+    .top-bar .rating small { color: var(--muted); font-size: 0.68em; display: block; margin-top: 2px; }
+    .top-bar .stats { display: flex; gap: 14px; font-size: 0.82em; color: var(--muted); flex-wrap: wrap; }
+    .top-bar .stats strong { display: block; color: var(--text); font-size: 1.05em; }
+    .section-title { font-size: 1.4em; font-weight: 900; color: var(--primary); margin: 28px 0 14px; display: flex; align-items: center; gap: 8px; }
+    .section-title::after { content: ''; flex: 1; height: 3px; background: linear-gradient(to left, var(--primary), transparent); border-radius: 4px; }
+    .cat-label {
+      font-weight: 700; color: var(--primary); font-size: 1.05em; margin: 20px 0 10px;
+      padding: 8px 14px; background: rgba(192,57,43,0.06); border-radius: 10px; border-right: 4px solid var(--primary);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 10px; }
+    .menu-item { background: var(--card); border-radius: 12px; padding: 12px 14px; box-shadow: 0 1px 8px rgba(0,0,0,0.04); display: flex; align-items: center; gap: 10px; transition: .15s; border: 1px solid transparent; }
+    .menu-item:active { transform: scale(0.98); }
+    .menu-item .info { flex: 1; min-width: 0; }
+    .menu-item .name { font-weight: 700; font-size: 0.92em; }
+    .menu-item .desc { font-size: 0.75em; color: var(--muted); margin-top: 1px; }
+    .menu-item .price { font-weight: 900; color: var(--primary); font-size: 1em; white-space: nowrap; }
+    .qty-controls { display: flex; align-items: center; gap: 3px; flex-shrink: 0; }
+    .qty-btn { width: 34px; height: 34px; border-radius: 50%; border: none; font-size: 1.15em; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: .12s; font-family: inherit; }
+    .qty-minus { background: #f0ebe6; color: var(--text); }
+    .qty-minus:active { background: #e0d6ce; }
+    .qty-plus { background: var(--primary); color: #fff; }
+    .qty-plus:active { background: #a93226; }
+    .qty-value { font-weight: 700; font-size: 0.95em; min-width: 26px; text-align: center; }
+    .qty-value.zero { color: #ccc; }
+    .location-box { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); margin: 20px 0; }
+    .location-box h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
+    .loc-item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f0ece8; }
+    .loc-item:last-child { border-bottom: none; }
+    .loc-item .addr { flex: 1; font-size: 0.88em; }
+    .loc-item .addr small { display: block; color: var(--muted); font-size: 0.83em; }
+    .btn { font-family: inherit; font-weight: 700; border-radius: 10px; border: none; cursor: pointer; transition: .15s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 0.83em; padding: 6px 12px; }
+    .btn-map { background: #4285F4; color: #fff; }
+    .btn-map:hover { background: #3367d6; }
+    .cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 998; }
+    .cart-overlay.open { display: block; }
+    .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 999; background: var(--card); border-radius: 20px 20px 0 0; box-shadow: 0 -8px 40px rgba(0,0,0,0.15); transform: translateY(100%); transition: transform .35s cubic-bezier(.4,0,.2,1); max-height: 75vh; display: flex; flex-direction: column; }
+    .cart-bar.open { transform: translateY(0); }
+    .cart-handle { width: 44px; height: 5px; background: #ddd; border-radius: 4px; margin: 10px auto 6px; cursor: pointer; }
+    .cart-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 18px 6px; border-bottom: 1px solid #f0ece8; }
+    .cart-header h3 { font-size: 1em; }
+    .cart-header .count { color: var(--muted); font-size: 0.82em; }
+    .cart-header .close-cart { background: none; border: none; font-size: 1.4em; cursor: pointer; color: var(--muted); font-family: inherit; padding: 0 4px; }
+    .cart-items { overflow-y: auto; padding: 6px 18px; flex: 1; -webkit-overflow-scrolling: touch; }
+    .cart-item { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid #f5f0eb; }
+    .cart-item .ci-name { flex: 1; font-size: 0.88em; font-weight: 500; }
+    .cart-item .ci-qty { color: var(--muted); font-size: 0.83em; min-width: 28px; text-align: center; }
+    .cart-item .ci-price { font-weight: 700; color: var(--primary); font-size: 0.88em; min-width: 48px; text-align: left; }
+    .cart-item .ci-remove { background: none; border: none; color: #ccc; cursor: pointer; font-size: 1em; font-family: inherit; padding: 2px; }
+    .cart-item .ci-remove:active { color: #e74c3c; }
+    .cart-empty { text-align: center; padding: 28px 0; color: var(--muted); font-size: 0.88em; }
+    .cart-footer { padding: 12px 18px 18px; border-top: 1px solid #f0ece8; }
+    .cart-total { display: flex; justify-content: space-between; font-weight: 900; font-size: 1.05em; margin-bottom: 10px; }
+    .cart-total span:last-child { color: var(--primary); }
+    .btn-whatsapp-send { width: 100%; padding: 15px; background: var(--whatsapp); color: #fff; border: none; border-radius: 12px; font-weight: 700; font-size: 1em; cursor: pointer; transition: .15s; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-whatsapp-send:active { background: #1da851; transform: scale(0.98); }
+    .btn-whatsapp-send:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+    .cart-fab {
+      position: fixed; bottom: 20px; left: 20px; z-index: 997; background: var(--whatsapp); color: #fff;
+      border: none; border-radius: 60px; padding: 14px 22px; font-weight: 700; font-size: 0.95em;
+      cursor: pointer; box-shadow: 0 6px 30px rgba(37,211,102,0.4); display: none; align-items: center; gap: 8px;
+      transition: .2s; font-family: inherit; animation: fabIn .3s ease-out;
+    }
+    @keyframes fabIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .cart-fab:active { transform: scale(0.95); }
+    .cart-fab .badge { background: #fff; color: var(--whatsapp); border-radius: 30px; padding: 0 8px; font-size: 0.78em; min-width: 22px; text-align: center; font-weight: 900; }
+    .whatsapp-float { position: fixed; bottom: 80px; left: 20px; z-index: 996; background: var(--whatsapp); color: #fff; text-decoration: none; border-radius: 60px; padding: 13px 20px; font-weight: 700; font-size: 0.9em; box-shadow: 0 6px 30px rgba(37,211,102,0.4); display: flex; align-items: center; gap: 8px; transition: .2s; font-family: inherit; animation: fabIn .3s ease-out; }
+    .whatsapp-float:active { transform: scale(0.95); }
+    .loading { text-align: center; padding: 60px 20px; color: var(--muted); }
+    .footer { text-align: center; padding: 18px; color: var(--muted); font-size: 0.78em; }
+    .emoji-icon { font-size: 1.2em; }
+    .admin-pwd,.admin-modal{display:none;position:fixed;inset:0;z-index:2001;align-items:center;justify-content:center;background:rgba(0,0,0,0.5)}
+    .admin-pwd.open,.admin-modal.open{display:flex}
+    .admin-pwd-box,.admin-box{background:var(--card);border-radius:var(--radius);padding:24px;width:280px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25)}
+    .admin-box{width:92%;max-width:640px;max-height:85vh;overflow-y:auto}
+    .admin-pwd-box h3,.admin-box h2{margin-bottom:10px;font-size:.95em;display:flex;justify-content:space-between;align-items:center}
+    .admin-box h2 button{background:none;border:none;font-size:1.2em;cursor:pointer;color:var(--muted);font-family:inherit}
+    .admin-pwd-box input{font-family:inherit;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:1em;width:100%;text-align:center;margin-bottom:10px;direction:ltr}
+    .admin-pwd-box button{width:100%;padding:10px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;font-size:.9em}
+    .admin-cat{border:1px solid #eee;border-radius:10px;padding:10px 12px;margin-bottom:10px}
+    .admin-cat h3{font-size:.9em;display:flex;align-items:center;gap:6px;justify-content:space-between;margin-bottom:6px}
+    .admin-itm{display:flex;gap:4px;align-items:center;margin-bottom:3px}
+    .admin-itm input{font-family:inherit;padding:3px 6px;border:1px solid #ddd;border-radius:5px;font-size:.8em}
+    .admin-itm .an{flex:1;min-width:60px}
+    .admin-itm .ap{width:50px}
+    .admin-btn{font-family:inherit;font-weight:700;border:none;border-radius:5px;cursor:pointer;font-size:.75em;padding:3px 7px}
+    .admin-add{background:var(--primary);color:#fff}
+    .admin-del{background:#e74c3c;color:#fff}
+    .admin-save{background:var(--whatsapp);color:#fff;width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;font-size:1em;cursor:pointer;font-family:inherit;margin:8px 0 4px}
+    .admin-reset{background:#ccc;color:var(--text);width:100%;padding:8px;border:none;border-radius:8px;font-weight:500;font-size:.82em;cursor:pointer;font-family:inherit}
+    @media (max-width: 768px) {
+      :root { --header-h: 170px; }
+      .header h1 { font-size: 1.5em; }
+      .header .sub { font-size: 0.85em; }
+      .menu-grid { grid-template-columns: 1fr; gap: 8px; }
+      .cart-bar { max-height: 80vh; border-radius: 16px 16px 0 0; }
+      .cart-fab { left: 14px; bottom: 14px; padding: 12px 18px; font-size: 0.85em; }
+      .whatsapp-float { left: 14px; bottom: 74px; padding: 11px 16px; font-size: 0.82em; }
+      .top-bar { padding: 12px 16px; }
+      .top-bar .stats { gap: 10px; font-size: 0.78em; }
+    }
+    @media (max-width: 480px) {
+      :root { --header-h: 150px; }
+      .header { padding: 32px 16px 24px; }
+      .header h1 { font-size: 1.3em; }
+      .menu-item { padding: 10px 12px; }
+      .qty-btn { width: 30px; height: 30px; font-size: 1em; }
+      .cart-fab { left: 10px; bottom: 10px; padding: 10px 14px; font-size: 0.8em; border-radius: 40px; }
+      .whatsapp-float { left: 10px; bottom: 64px; padding: 9px 12px; font-size: 0.78em; border-radius: 40px; }
+      .cart-fab .badge { min-width: 18px; font-size: 0.72em; }
+    }
+    @media (min-width: 769px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header" id="pageHeader">
+    <div class="deco"><span></span><span></span><span></span><span></span><span></span></div>
+    <h1 id="storeTitle">تحميل...</h1>
+    <div class="sub" id="storeSub"></div>
+  </div>
+  <div class="container" id="pageContent">
+    <div class="loading" id="loadingMsg">جاري تحميل المنيو...</div>
+  </div>
+  <a class="whatsapp-float" id="whatsappFloat" href="#" target="_blank">💬 واتساب</a>
+  <button class="cart-fab" id="cartFab" onclick="toggleCart()"><span>🛒</span> طلبي <span class="badge" id="cartBadge">0</span></button>
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-bar" id="cartBar">
+    <div class="cart-handle" onclick="toggleCart()"></div>
+    <div class="cart-header"><h3>🛒 طلبي</h3><span class="count" id="cartCount">0 صنف</span><button class="close-cart" onclick="toggleCart()">&times;</button></div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty">السلة فارغة. اختر أصناف من القائمة</div></div>
+    <div class="cart-footer"><div class="cart-total"><span>المجموع</span><span id="cartTotal">0 ر.س</span></div><button class="btn-whatsapp-send" id="sendBtn" onclick="sendOrder()">💬 أرسل الطلب عبر واتساب</button></div>
+  </div>
+  <div class="admin-pwd" id="adminPwd"><div class="admin-pwd-box"><h3>🔐 رقم الدخول</h3><input type="password" id="pwdInput" placeholder="أدخل الرقم السري" onkeydown="if(event.key==='Enter')checkPwd()"><button onclick="checkPwd()">دخول</button></div></div>
+  <div class="admin-modal" id="adminModal"><div class="admin-box"><h2>⚙️ إدارة المنيو <button onclick="closeAdmin()">✕</button></h2><div id="adminContent"></div></div></div>
+  <script>
+    const defaultRestaurants = [
+      { id:'sara', name:'بروست سارة', phone:'966540230888', rating:4.8, area:'8 فروع—العزيزية، الهجرة، الجرف وأكثر', mapsQuery:'بروست+سارة+المدينة+المنورة', desc:'دجاج محلي طازج 100% — تتبيلة سرية لمدة 12 ساعة' },
+      { id:'basheer', name:'مطاعم البشير — بروست', phone:'966148235190', rating:4.2, area:'طريق الملك عبدالعزيز — طريق المطار', mapsQuery:'مطاعم+البشير+بروست+المدينة+المنورة', desc:'بروست بلدي طازج — خدمة 24 ساعة' },
+      { id:'mrbroast', name:'مستر بروست MR.Broast', phone:'966554892026', rating:4.3, area:'بني حارثة — حي النصر', mapsQuery:'مستر+بروست+المدينة+المنورة', desc:'أفضل بروست بلدي — طعم خرافي ونظافة' },
+      { id:'safwa', name:'بروست الصفوة', phone:'966553239010', rating:4.5, area:'سكة الحديد (العنابس) — الدائري الثاني', mapsQuery:'بروست+الصفوة+العنابس+المدينة', desc:'بروست بلدي نظيف — الزيت يتغير كل يوم' },
+      { id:'raheeb', name:'بروست الرهيب', phone:'966542410117', rating:4.3, area:'حي البركة — السكة الحديد', mapsQuery:'بروست+الرهيب+المدينة+المنورة', desc:'بروست طازج — سرعة في الخدمة — طعم رهيب' },
+      { id:'zadway', name:'بروست زاد واي', phone:'966500917101', rating:4.1, area:'الزهرة — الراية — مهزوز', mapsQuery:'بروست+زاد+واي+المدينة', desc:'بروست طازج بنكهة مميزة' },
+      { id:'brostich', name:'بروستيش Broastich', phone:'966555847331', rating:4.5, area:'الاصيفرين', mapsQuery:'بروستيش+المدينة+المنورة', desc:'بروست مقرمش بطعم لا يُقاوم' },
+      { id:'taj', name:'بروست تاج الفروج', phone:'966538205828', rating:4.0, area:'شوران', mapsQuery:'بروست+تاج+الفروج+المدينة', desc:'بروست بلدي طازج يومياً' },
+      { id:'tahlya', name:'بروست التحليه (الدفاع)', phone:'966563063016', rating:4.4, area:'الدفاع', mapsQuery:'بروست+التحليه+الدفاع+المدينة', desc:'بروست وتحلية بجودة عالية' },
+      { id:'chickiz1', name:'بروست تشيكيز (الخالدية)', phone:'966560062309', rating:4.9, area:'الخالدية', mapsQuery:'بروست+تشيكيز+الخالدية+المدينة', desc:'بروست تشيكيز الأصلي — نكهة فاخرة' },
+      { id:'chickiz2', name:'بروست تشيكيز (الهجرة)', phone:'966544948826', rating:5.0, area:'ممشى الهجرة', mapsQuery:'بروست+تشيكيز+الهجرة+المدينة', desc:'بروست تشيكيز — طعم لا يُضاهى' },
+      { id:'zaak1', name:'زاك بروست (الخالدية)', phone:'966538107275', rating:4.5, area:'الخالدية', mapsQuery:'زاك+بروست+الخالدية+المدينة', desc:'طعم يتجاوز التوقعات' },
+      { id:'zaak2', name:'زاك بروست (العزيزية)', phone:'966506991835', rating:4.6, area:'العزيزية', mapsQuery:'زاك+بروست+العزيزية+المدينة', desc:'ZAAK BROAST — Taste Beyond Expectations' },
+      { id:'hara', name:'Al Hara Broast', phone:'966559051189', rating:4.2, area:'طريق المطار', mapsQuery:'Al+Hara+Broast+Madinah', desc:'بروست عائلي بنكهة منزلية' },
+      { id:'alyoum', name:'بروست اليوم', phone:'966557671345', rating:4.3, area:'Ar Rawabi', mapsQuery:'بروست+اليوم+المدينة', desc:'بروست طازج مُعد يومياً' },
+      { id:'katakeet', name:'بروست كتاكيت', phone:'96659796180', rating:4.3, area:'قربان', mapsQuery:'بروست+كتاكيت+المدينة', desc:'بروست صغير الحجم كبير الطعم' },
+      { id:'frooji', name:'بروست فروجي (الدفاع)', phone:'966557703374', rating:4.3, area:'الدفاع', mapsQuery:'بروست+فروجي+الدفاع+المدينة', desc:'طعم البروست البلدي الأصيل' },
+      { id:'habaka', name:'حبكة البروست البلدي', phone:'966561202852', rating:4.4, area:'الفتح', mapsQuery:'حبكة+البروست+البلدي+المدينة', desc:'البروست البلدي بقصة حبكة مميزة' },
+      { id:'broastone', name:'بروست ون', phone:'966545834589', rating:3.8, area:'الملك فهد', mapsQuery:'بروست+ون+المدينة', desc:'بروست ون — طعم واحد ممتاز' },
+      { id:'safa', name:'الصفا بروست', phone:'966580147028', rating:4.2, area:'العريض', mapsQuery:'الصفا+بروست+المدينة', desc:'بروست بنكهة الصفا الأصيلة' },
+      { id:'baladi', name:'البروست البلدي', phone:'966541422606', rating:4.4, area:'مدبنب', mapsQuery:'البروست+البلدي+المدينة', desc:'البروست البلدي الطازج يومياً' },
+      { id:'sultana', name:'بروست سلطانه', phone:'966541404774', rating:4.8, area:'العيون', mapsQuery:'بروست+سلطانه+المدينة', desc:'بروست سلطانه — طعم ملكي فاخر' },
+      { id:'mstrfrj', name:'بروست مستر فروج', phone:'966566820175', rating:4.8, area:'الجمعة', mapsQuery:'بروست+مستر+فروج+المدينة', desc:'مستر فروج — البروست الأطيب في المدينة' },
+      { id:'sos', name:'بروست صوص الفروج', phone:'966552991129', rating:4.3, area:'الجابرة', mapsQuery:'بروست+صوص+الفروج+المدينة', desc:'بروست بصوص الفروج السري' },
+      { id:'mazak', name:'بروست مذاق الدجاج', phone:'966591236603', rating:4.9, area:'عروة', mapsQuery:'بروست+مذاق+الدجاج+المدينة', desc:'أفضل مذاق للدجاج البروست' },
+    ];
+    const catIcons = { 'البروست':'🍗', 'مسحب وستربس':'🥩', 'برجر وساندويتشات':'🍔', 'شاورما':'🌯', 'بروست الدجاج':'🍗', 'مسحب وفيليه':'🥩', 'المأكولات البحرية':'🦐', 'الإضافات':'🥗', 'الإضافات والسلطات':'🥗', 'المقبلات':'🥗', 'الطلبات الجانبية':'🍟', 'المشروبات':'🥤', 'برجر':'🍔', 'إضافات':'🧂', 'سلطات':'🥗', 'برجر وساندويتشات':'🍔', 'مسحب وستربس':'🥩' };
+    const defaultMenu = [
+      { cat: 'البروست', items: [
+        { name: 'بروست دجاج (ربع)', price: 8, desc: 'ربع دجاجة بروست مقرمش' },
+        { name: 'بروست دجاج (نصف)', price: 15, desc: 'نصف دجاجة بروست بلدي' },
+        { name: 'بروست دجاج (كامل)', price: 28, desc: 'دجاجة كاملة بروست مقرمش' },
+      ]},
+      { cat: 'مسحب وستربس', items: [
+        { name: 'مسحب دجاج 8 قطع', price: 15, desc: 'قطع مسحب مقرمشة وذهبية' },
+        { name: 'ستربس دجاج 6 قطع', price: 17, desc: 'شرائح دجاج مقلية مقرمشة' },
+      ]},
+      { cat: 'برجر وساندويتشات', items: [
+        { name: 'برجر دجاج', price: 8, desc: 'برجر دجاج طازج مع الصلصات' },
+        { name: 'ساندويتش شاورما', price: 5, desc: 'شاورما دجاج في خبز صامولي' },
+      ]},
+      { cat: 'الإضافات والسلطات', items: [
+        { name: 'بطاطس', price: 5, desc: 'بطاطس مقلية طازجة' },
+        { name: 'سلطة حارة', price: 3, desc: 'سلطة حارة شهية' },
+        { name: 'صوص الثوم', price: 1, desc: 'ثوم بلدي طازج' },
+        { name: 'خبز', price: 1, desc: 'خبز طازج' },
+      ]},
+      { cat: 'المشروبات', items: [
+        { name: 'مشروب غازي', price: 3, desc: '' },
+        { name: 'ماء معدني', price: 1, desc: '' },
+      ]},
+    ];
+    const customMenus = {
+      sara: [
+        { cat: 'بروست الدجاج', items: [
+          { name: 'وجبة بروست 4 قطع (أصلي)', price: 19, desc: 'بروست كلاسيكي مقرمش باللون الذهبي' },
+          { name: 'وجبة بروست 4 قطع (حراق)', price: 19, desc: 'نكهة حارة وجريئة مع كل قضمة' },
+          { name: 'وجبة بروست قطعتين (أصلي)', price: 10, desc: 'وجبة سريعة ومشبعة' },
+          { name: 'وجبة بروست قطعتين (حراق)', price: 10, desc: 'النكهة الحارة المثالية' },
+        ]},
+        { cat: 'مسحب وفيليه', items: [
+          { name: 'مسحب دجاج 8 قطع (عادي)', price: 16, desc: 'قطع ذهبية مقرمشة' },
+          { name: 'مسحب دجاج 8 قطع (حراق)', price: 16, desc: 'بنكهة حارة ومميزة' },
+          { name: 'مسحب دجاج بالجبنة 8 قطع', price: 17, desc: 'محشوة بالجبن الذائب' },
+          { name: 'فيليه دجاج 5 قطع', price: 19, desc: 'شرائح سميكة من صدر الدجاج' },
+        ]},
+        { cat: 'المأكولات البحرية', items: [
+          { name: 'جمبري ذهبي 15 قطعة', price: 25, desc: 'جمبري فاخر مقرمش' },
+          { name: 'سمك فيليه 8 قطع', price: 20, desc: 'فيليه سمك ذهبي مقرمش' },
+        ]},
+        { cat: 'برجر وساندويتشات', items: [
+          { name: 'برجر دجاج', price: 7, desc: 'دجاج طازج في خبز طري' },
+          { name: 'برجر دجاج بالجبن', price: 8, desc: 'مع شريحة جبن ذائب' },
+          { name: 'برجر زنجر دجاج', price: 9, desc: 'زنجر حراق مقرمش' },
+          { name: 'برجر لحم', price: 7, desc: 'شريحة لحم غنية' },
+          { name: 'ساندويتش مسحب', price: 6, desc: 'قطع مسحب مقرمشة' },
+          { name: 'ساندويتش تورتيلا', price: 12, desc: 'دجاج في خبز تورتيلا' },
+          { name: 'ساندويتش جمبري', price: 7, desc: 'جمبري ذهبي مقرمش' },
+          { name: 'ساندويتش سمك فيليه', price: 7, desc: 'فيليه سمك مقلي' },
+        ]},
+        { cat: 'شاورما', items: [
+          { name: 'شاورما صامولي', price: 5, desc: 'شاورما في خبز الصامولي' },
+          { name: 'شاورما شامي', price: 5, desc: 'طريقة شامية أصيلة' },
+          { name: 'شاورما فطير', price: 6, desc: 'خبز الفطير المقرمش' },
+          { name: 'شاورما صاروخ', price: 9, desc: 'حجم كبير بالبطاطس والثوم' },
+        ]},
+        { cat: 'إضافات', items: [
+          { name: 'بطاطس (عادي)', price: 5, desc: '' },
+          { name: 'بطاطس (كبير)', price: 10, desc: '' },
+          { name: 'صلصة الثوم الأسطورية', price: 1, desc: '' },
+          { name: 'أصابع الجبن 9 قطع', price: 17, desc: '' },
+        ]},
+      ],
+      basheer: [
+        { cat: 'البروست', items: [
+          { name: 'بروست أربع قطع', price: 20, desc: 'دجاج بلدي، بطاطس، خبز، ثوم، كتشب' },
+          { name: 'مسحب الدجاج', price: 20, desc: '10 قطع دجاج مقرمش' },
+          { name: 'ستربس الدجاج', price: 20, desc: '7 قطع دجاج شهي' },
+          { name: 'جمبري', price: 25, desc: '10 قطع جمبري، بطاطس، خبز' },
+        ]},
+        { cat: 'برجر', items: [
+          { name: 'وجبة دجاج وبرجر', price: 23, desc: 'قطعتين دجاج + برجر + بطاطس + مشروب' },
+          { name: 'وجبة البرجر', price: 17, desc: 'برجر دجاج + بطاطس + ثوم + مشروب' },
+          { name: 'برجر الدجاج', price: 11, desc: 'برجر دجاج طازج' },
+        ]},
+        { cat: 'المقبلات', items: [
+          { name: 'سلطة الملفوف', price: 5, desc: 'سلطة ملفوف طازجة' },
+          { name: 'حمص', price: 5, desc: 'صحن حمص شامي' },
+          { name: 'متبل', price: 5, desc: 'متبل بالخلطة الأصلية' },
+        ]},
+        { cat: 'الطلبات الجانبية', items: [
+          { name: 'صحن بطاطس', price: 5, desc: '' },
+          { name: 'خبز (قطعتين)', price: 1, desc: '' },
+          { name: 'ثوم عادي', price: 1, desc: '' },
+          { name: 'ثوم حراق', price: 1, desc: '' },
+          { name: 'صلصة كوكتيل', price: 1, desc: '' },
+        ]},
+      ],
+      mrbroast: [
+        { cat: 'البروست', items: [
+          { name: 'بروست دجاج 4 قطع', price: 24, desc: 'دجاج بلدي مقرمش مع بطاطس وخبز وصلصات' },
+          { name: 'بروست حار 4 قطع', price: 24, desc: 'نفس الوصفة مع نكهة حارة' },
+        ]},
+        { cat: 'برجر', items: [
+          { name: 'برجر زنجر (عادي)', price: 21, desc: 'دجاج زنجر طازج، خبز خاص، جبن' },
+          { name: 'برجر زنجر (حار)', price: 22, desc: 'نفس الوصفة مع نكهة حارة' },
+          { name: 'دبل زنجر', price: 30, desc: 'شريحتين زنجر مع جبن' },
+          { name: 'برجر لحم كلاسيك', price: 27, desc: 'لحم بقري مشوي طازج' },
+          { name: 'برجر جمبري', price: 22, desc: 'جمبري مع خبز مميز وجبن' },
+        ]},
+        { cat: 'ساندويتشات', items: [
+          { name: 'كنج دجاج', price: 16, desc: 'دجاج في صامولي مع بطاطس' },
+          { name: 'كنج زنجر', price: 21, desc: 'زنجر في صامولي' },
+          { name: 'ساندويتش دجاج', price: 9, desc: 'دجاج في خبز شامي' },
+          { name: 'ساندويتش زنجر', price: 11, desc: 'زنجر في خبز شامي' },
+        ]},
+      ],
+      safwa: [
+        { cat: 'البروست', items: [
+          { name: 'بروست ربع دجاجة', price: 8, desc: 'بروست بلدي مع السلطة الحارة' },
+          { name: 'بروست نصف دجاجة', price: 15, desc: 'نصف دجاجة بروست بلدي طازج' },
+          { name: 'بروست دجاجة كاملة', price: 28, desc: 'دجاجة كاملة بروست بلدي مقرمش' },
+        ]},
+        { cat: 'برجر وساندويتشات', items: [
+          { name: 'وجبة برجر دجاج', price: 6, desc: 'برجر طازج مع البطاطس والصلصات' },
+          { name: 'ساندويتش شاورما', price: 5, desc: 'شاورما دجاج في خبز صامولي' },
+        ]},
+        { cat: 'مسحب وستربس', items: [
+          { name: 'مسحب دجاج 10 قطع', price: 16, desc: 'قطع مسحب مقرمشة وذهبية' },
+          { name: 'ستربس دجاج 7 قطع', price: 18, desc: 'شرائح دجاج مقلية مقرمشة' },
+        ]},
+        { cat: 'الإضافات', items: [
+          { name: 'سلطة حارة مميزة', price: 3, desc: 'السلطة الحارة الأكثر طلباً' },
+          { name: 'بطاطس (حجم كبير)', price: 8, desc: 'بطاطس مقلية طازجة' },
+          { name: 'صوص الثوم', price: 1, desc: 'ثوم بلدي طازج' },
+          { name: 'خبز عيش', price: 1, desc: 'خبز عيش بلدي طازج' },
+        ]},
+        { cat: 'المشروبات', items: [
+          { name: 'مشروب غازي (بيبسي)', price: 3, desc: '' },
+          { name: 'ماء معدني', price: 1, desc: '' },
+        ]},
+      ],
+      raheeb: [
+        { cat: 'البروست', items: [
+          { name: 'بروست دجاج (ربع)', price: 8, desc: 'بروست دجاج بلدي طازج مقرمش' },
+          { name: 'بروست دجاج (نصف)', price: 15, desc: 'نصف دجاجة بروست بلدي' },
+          { name: 'بروست دجاج (كامل)', price: 28, desc: 'دجاجة كاملة بروست مقرمش' },
+        ]},
+        { cat: 'مسحب وستربس', items: [
+          { name: 'مسحب دجاج 8 قطع', price: 15, desc: 'قطع مسحب مقرمشة وذهبية' },
+          { name: 'ستربس دجاج 6 قطع', price: 17, desc: 'شرائح دجاج مقلية مقرمشة' },
+        ]},
+        { cat: 'برجر وساندويتشات', items: [
+          { name: 'برجر دجاج', price: 8, desc: 'برجر دجاج طازج مع الصلصات' },
+          { name: 'ساندويتش شاورما', price: 5, desc: 'شاورما دجاج في خبز صامولي' },
+        ]},
+        { cat: 'الإضافات والسلطات', items: [
+          { name: 'بطاطس', price: 5, desc: 'بطاطس مقلية طازجة بكمية ممتازة' },
+          { name: 'سلطة حارة', price: 3, desc: 'سلطة حارة شهية' },
+          { name: 'صوص الثوم', price: 1, desc: 'ثوم بلدي طازج ممتاز' },
+          { name: 'خبز', price: 1, desc: 'خبز طازج' },
+        ]},
+        { cat: 'المشروبات', items: [
+          { name: 'مشروب غازي', price: 3, desc: '' },
+          { name: 'ماء معدني', price: 1, desc: '' },
+        ]},
+      ],
+    };
+    let store = null, cart = {}, menuData = [];
+    function getRestaurant(id) {
+      const saved = localStorage.getItem('broastWorkshop');
+      if (saved) { const all = JSON.parse(saved); const found = all.find(r => r.id === id && !r.deleted); if (found) return found; }
+      return defaultRestaurants.find(r => r.id === id) || null;
+    }
+    function getStars(r) { const f = Math.floor(r), h = r - f >= 0.5 ? 1 : 0; return '★'.repeat(f) + (h ? '½' : '') + '☆'.repeat(Math.max(0,5-f-h)); }
+    function fmtPhone(p) { if (p?.startsWith('966')) return '0' + p.slice(3); return p||''; }
+    function init() {
+      const p = new URLSearchParams(window.location.search), id = p.get('id') || 'sara';
+      store = getRestaurant(id);
+      if (!store) { document.getElementById('pageContent').innerHTML = '<div class="loading" style="color:var(--red)">المحل غير موجود</div>'; return; }
+      const saved = localStorage.getItem('menuEdit_'+store.id); if(saved){try{const d=JSON.parse(saved);menuData.length=0;menuData.push(...d)}catch(e){}}
+      document.title = store.name + ' — طلب أونلاين | المدينة المنورة';
+      document.getElementById('storeTitle').textContent = store.name;
+      document.getElementById('storeSub').textContent = store.desc || 'بروست طازج — خدمة سريعة';
+      menuData = customMenus[id] || defaultMenu;
+      const saved = localStorage.getItem('menuEdit_' + id); if (saved) { try { menuData = JSON.parse(saved); } catch(e) {} }
+      const c = document.getElementById('pageContent'), stars = getStars(store.rating);
+      c.innerHTML = `
+        <div class="top-bar">
+          <div><div class="rating">${stars} <small>التقييم العام ${store.rating}</small></div></div>
+          <div class="stats">
+            <span><strong>${fmtPhone(store.phone)}</strong> للطلب</span>
+            <span><strong>${store.area}</strong></span>
+          </div>
+        </div>
+        <h2 class="section-title">🍽️ قائمة الطعام</h2>
+        <div id="menuContainer"></div>
+        <div class="location-box">
+          <h3>📍 الموقع على الخريطة</h3>
+          <div class="loc-item"><div class="addr"><strong>${store.name}</strong><small>${store.area} — المدينة المنورة</small></div><a href="https://www.google.com/maps/search/${store.mapsQuery || encodeURIComponent(store.name + ' المدينة المنورة')}" target="_blank" class="btn btn-map">📍 خرائط</a></div>
+        </div>
+        <div class="footer">${store.name} — المدينة المنورة 2026 · <span style="cursor:pointer" onclick="showPwd()">إدارة</span></div>
+      `;
+      document.getElementById('whatsappFloat').href = 'https://wa.me/' + store.phone;
+      renderMenu();
+    }
+    function renderMenu() {
+      const container = document.getElementById('menuContainer');
+      container.innerHTML = menuData.map(cat => `
+        <div class="cat-label"><span class="emoji-icon">${catIcons[cat.cat]||'🍽️'}</span> ${cat.cat}</div>
+        <div class="menu-grid">
+          ${cat.items.map(item => `
+            <div class="menu-item" data-name="${item.name}" data-price="${item.price}">
+              <div class="info">
+                <div class="name">${item.name}</div>
+                ${item.desc ? '<div class="desc">' + item.desc + '</div>' : ''}
+              </div>
+              <div class="price">${item.price} ر.س</div>
+              <div class="qty-controls">
+                <button class="qty-btn qty-minus" onclick="updateQty(this,-1)">−</button>
+                <span class="qty-value zero">0</span>
+                <button class="qty-btn qty-plus" onclick="updateQty(this,1)">+</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+    }
+    function updateQty(btn, d) {
+      const item = btn.closest('.menu-item'), name = item.dataset.name, price = parseInt(item.dataset.price), valEl = item.querySelector('.qty-value');
+      let val = parseInt(valEl.textContent) || 0; val = Math.max(0, val + d);
+      valEl.textContent = val; valEl.classList.toggle('zero', val === 0);
+      if (val === 0) delete cart[name]; else cart[name] = { name, price, qty: val };
+      renderCart();
+    }
+    function renderCart() {
+      const items = document.getElementById('cartItems'), count = document.getElementById('cartCount'), total = document.getElementById('cartTotal'), badge = document.getElementById('cartBadge'), fab = document.getElementById('cartFab'), sendBtn = document.getElementById('sendBtn');
+      const vals = Object.values(cart), ic = vals.reduce((s,i) => s+i.qty, 0), sum = vals.reduce((s,i) => s+i.price*i.qty, 0);
+      badge.textContent = ic; count.textContent = ic + ' صنف'; total.textContent = sum + ' ر.س';
+      fab.style.display = ic > 0 ? 'flex' : 'none'; sendBtn.disabled = ic === 0;
+      if (ic === 0) { items.innerHTML = '<div class="cart-empty">السلة فارغة. اختر أصناف من القائمة</div>'; if (document.getElementById('cartBar').classList.contains('open')) toggleCart(); return; }
+      items.innerHTML = vals.map(i => '<div class="cart-item"><span class="ci-name">' + i.name + '</span><span class="ci-qty">×' + i.qty + '</span><span class="ci-price">' + (i.price*i.qty) + ' ر.س</span><button class="ci-remove" onclick="removeItem(\'' + i.name.replace(/'/g, "\\'") + '\')">✕</button></div>').join('');
+    }
+    function removeItem(name) { delete cart[name]; document.querySelectorAll('.menu-item').forEach(el => { if (el.dataset.name === name) { const v = el.querySelector('.qty-value'); v.textContent = '0'; v.classList.add('zero'); } }); renderCart(); }
+    function toggleCart() { const bar = document.getElementById('cartBar'), overlay = document.getElementById('cartOverlay'), isOpen = bar.classList.toggle('open'); overlay.classList.toggle('open', isOpen); document.body.style.overflow = isOpen && Object.keys(cart).length > 0 ? 'hidden' : ''; }
+    function sendOrder() { const vals = Object.values(cart); if (vals.length === 0 || !store) return; const lines = vals.map(i => '• ' + i.name + ' × ' + i.qty + ' = ' + (i.price*i.qty) + ' ر.س'); const total = vals.reduce((s,i) => s+i.price*i.qty, 0); const msg = '🍗 طلب جديد من ' + store.name + '\n------------------\n' + lines.join('\n') + '\n------------------\n💰 المجموع: ' + total + ' ر.س\n\n📍 الرجاء تأكيد الطلب'; window.open('https://wa.me/' + store.phone + '?text=' + encodeURIComponent(msg), '_blank'); }
+    let _ed=[];function showPwd(){let d=document.getElementById('adminPwd');d.classList.add('open');document.getElementById('pwdInput').value='';setTimeout(()=>document.getElementById('pwdInput').focus(),100)}
+    function checkPwd(){if(document.getElementById('pwdInput').value==='1122'){document.getElementById('adminPwd').classList.remove('open');openAdmin()}else alert('❌ رقم سري خطأ')}
+    function openAdmin(){let s=localStorage.getItem('menuEdit_'+store.id);_ed=s?JSON.parse(s):JSON.parse(JSON.stringify(menuData));document.getElementById('adminModal').classList.add('open');rAdm()}
+    function closeAdmin(){document.getElementById('adminModal').classList.remove('open')}
+    function rAdm(){let h=_ed.map((c,ci)=>'<div class="admin-cat"><h3><input value="'+c.cat+'" onchange="_ed['+ci+'].cat=this.value" style="font-family:inherit;padding:3px 6px;border:1px solid #ddd;border-radius:5px;font-size:.82em;flex:1"><button class="admin-btn admin-del" onclick="dC('+ci+')">✕</button></h3>'+c.items.map((it,ii)=>'<div class="admin-itm"><input class="an" value="'+it.name+'" onchange="_ed['+ci+'].items['+ii+'].name=this.value"><input class="ap" type="number" value="'+it.price+'" onchange="_ed['+ci+'].items['+ii+'].price=Number(this.value)" min="1"><button class="admin-btn admin-del" onclick="dI('+ci+','+ii+')">✕</button></div>').join('')+'<button class="admin-btn admin-add" onclick="aI('+ci+')" style="margin-top:4px">+إضافة صنف</button></div>').join('');h+='<button class="admin-btn admin-add" onclick="aC()" style="width:100%;padding:8px;margin-bottom:6px">+إضافة قسم</button>';h+='<button class="admin-save" onclick="sAv()">💾 حفظ التغييرات</button>';h+='<button class="admin-reset" onclick="rSt()">🔄 استعادة المنيو الافتراضي</button>';document.getElementById('adminContent').innerHTML=h}
+    function dC(ci){if(confirm('حذف القسم؟')){_ed.splice(ci,1);rAdm()}}
+    function dI(ci,ii){_ed[ci].items.splice(ii,1);rAdm()}
+    function aI(ci){_ed[ci].items.push({name:'جديد',price:10,desc:''});rAdm()}
+    function aC(){_ed.push({cat:'قسم جديد',items:[{name:'جديد',price:10,desc:''}]});rAdm()}
+    function sAv(){localStorage.setItem('menuEdit_'+store.id,JSON.stringify(_ed));menuData.length=0;menuData.push(..._ed);renderMenu();closeAdmin()}
+    function rSt(){if(confirm('استعادة المنيو الافتراضي؟')){localStorage.removeItem('menuEdit_'+store.id);location.reload()}}
+    init();
+  </script>
+</body>
+</html>
