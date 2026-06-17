@@ -66,7 +66,14 @@
     .btn-map:hover { background: #4285F4; color: #fff; }
     .btn-delete { background: transparent; color: #ddd; font-size: 0.9em; }
     .btn-delete:hover { color: var(--red); }
+    .wa-msg-area { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 12px 16px; margin-bottom: 12px; }
+    .wa-msg-area textarea { width: 100%; font-family: inherit; font-size: .82em; padding: 8px 10px; border: 1px solid #e0dcd6; border-radius: 8px; resize: vertical; min-height: 80px; direction: rtl; }
+    .wa-msg-area textarea:focus { outline: none; border-color: var(--primary); }
+    .wa-msg-area .wa-msg-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .wa-msg-area .wa-msg-hdr span { font-size: .82em; font-weight: 700; color: var(--primary); }
+    .wa-msg-area .wa-msg-hdr small { color: var(--muted); font-size: .72em; }
     .rest-card.deleted { display: none; }
+    .rest-card.new-row { border-right: 3px solid var(--green); }
     .rest-card.new-row { border-right: 3px solid var(--green); }
     .rest-card.filtered-out { display: none; }
     .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 0.9em; }
@@ -99,6 +106,13 @@
         <input class="full" id="addLink" placeholder="رابط خرائط جوجل (اختياري)">
         <button class="btn-add" onclick="addRestaurant()">إضافة المحل</button>
       </div>
+    </div>
+    <div class="wa-msg-area">
+      <div class="wa-msg-hdr"><span>✏️ نص رسالة واتساب <small style="color:var(--muted);font-weight:400">استخدم {name} لاسم المطعم</small></span></div>
+      <textarea id="waMsgInput" onchange="saveWaMsg()" placeholder="اكتب نص الرسالة...">مرحباً {name}،
+
+نقدم لكم إنشاء صفحة هبوط إلكترونية لمطعمكم بمنيو تفاعلي وسلة طلب وواتساب مباشر ولوحة تحكم، بسعر 100 ريال فقط!
+جربوا لوحة التحكم: اضغط "إدارة" في أسفل الصفحة وأدخل 1122.</textarea>
     </div>
     <div id="restList"></div>
     <div class="footer">ورشة التسويق — مطاعم البروست في المدينة المنورة 2026</div>
@@ -134,6 +148,10 @@
 
     let restaurants = [];
     let currentFilter = 'all';
+    const defaultWaMsg = document.getElementById('waMsgInput').value;
+    let waMsg = localStorage.getItem('broastWaMsg');
+    if (waMsg) document.getElementById('waMsgInput').value = waMsg;
+    function saveWaMsg() { localStorage.setItem('broastWaMsg', document.getElementById('waMsgInput').value); }
 
     function loadData() {
       const saved = localStorage.getItem('broastWorkshop');
@@ -149,8 +167,9 @@
       localStorage.setItem('broastWorkshop', JSON.stringify(restaurants));
     }
 
-    function makeWhatsAppLink(phone) {
-      return `https://wa.me/${phone}`;
+    function makeWhatsAppLink(phone, name) {
+      const msg = (localStorage.getItem('broastWaMsg') || defaultWaMsg).replace(/{name}/g, name);
+      return `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
     }
 
     function makeMapsLink(query) {
@@ -272,7 +291,7 @@
         `;
         const menuLink = r.hasMenu ? `<a href="${r.menuFile}" class="btn-menu">📋 المنيو</a>` : `<a href="menu.html?id=${r.id}" class="btn-menu">📋 المنيو</a>`;
         const copyLinkBtn = `<button class="btn-copy" onclick="copyLink('${r.id}',this)" title="نسخ رابط الصفحة">📎</button>`;
-        const waLink = `<a href="${makeWhatsAppLink(r.phone)}" target="_blank" class="btn-wa">💬 واتساب</a>`;
+        const waLink = `<a href="${makeWhatsAppLink(r.phone, r.name)}" target="_blank" class="btn-wa">💬 واتساب</a>`;
         const mapLink = r.mapsLink ? `<a href="${r.mapsLink}" target="_blank" class="btn-map">📍 خرائط</a>` : `<a href="${makeMapsLink(r.mapsQuery)}" target="_blank" class="btn-map">📍 خرائط</a>`;
         const cls = r._new ? 'rest-card new-row' : 'rest-card';
         return `<div class="${cls}">
