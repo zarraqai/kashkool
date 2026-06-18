@@ -180,6 +180,11 @@
       const saved = localStorage.getItem('broastWorkshop');
       if (saved) {
         restaurants = JSON.parse(saved);
+        // حذف المطاعم التي لم تعد في القائمة الافتراضية (j18–j30)
+        restaurants = restaurants.filter(r => defaultRestaurants.find(d => d.id === r.id) || r.id.startsWith('cust_'));
+        // إضافة المطاعم الجديدة من القائمة الافتراضية (j1–j17)
+        defaultRestaurants.forEach(dr => { if (!restaurants.find(r => r.id === dr.id)) restaurants.push({ ...dr, status:'pending', deleted:false }); });
+        // دمج أحدث البيانات
         restaurants = restaurants.map(r => { const d = defaultRestaurants.find(x => x.id === r.id); return d ? { ...d, ...r } : r; });
       } else {
         restaurants = defaultRestaurants.map(r => ({ ...r, status: 'pending', deleted: false }));
