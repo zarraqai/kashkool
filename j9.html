@@ -189,26 +189,29 @@
     function getStars(r) { const f = Math.floor(r), h = r - f >= 0.5 ? 1 : 0; return 'âک…'.repeat(f) + (h ? 'آ½' : '') + 'âک†'.repeat(Math.max(0,5-f-h)); }
     function init() {
       const saved = localStorage.getItem('menuEdit_mrbroast'); if(saved){try{const d=JSON.parse(saved);menuData.length=0;menuData.push(...d)}catch(e){}}
-      document.title = store.name + ' â€” ط·ظ„ط¨ ط£ظˆظ†ظ„ط§ظٹظ† | ' + store.city;
+      document.title = store.name + ' — طلب أونلاين | ' + store.city;
       document.getElementById('storeTitle').textContent = store.name;
-      document.getElementById('storeSub').textContent = store.desc || 'ط¨ط±ظˆط³طھ ط·ط§ط²ط¬ â€” ط®ط¯ظ…ط© ط³ط±ظٹط¹ط©';
+      document.getElementById('storeSub').textContent = store.desc || 'بروست طازج — خدمة سريعة';
       const c = document.getElementById('pageContent'), stars = getStars(store.rating);
       c.innerHTML = `
         <div class="top-bar">
-          <div><div class="rating">${stars} <small>ط§ظ„طھظ‚ظٹظٹظ… ط§ظ„ط¹ط§ظ… ${store.rating}</small></div></div>
+          <div><div class="rating">${stars} <small>التقييم العام ${store.rating}</small></div></div>
           <div class="stats">
-            <span><strong>${fmtPhone(store.phone)}</strong> ظ„ظ„ط·ظ„ط¨</span>
+            <span><strong>${fmtPhone(store.phone)}</strong> للطلب</span>
             <span><strong>${store.area}</strong></span>
           </div>
         </div>
-        <h2 class="section-title">ًںچ½ï¸ڈ ظ‚ط§ط¦ظ…ط© ط§ظ„ط·ط¹ط§ظ…</h2>
+        <h2 class="section-title">🍽️ قائمة الطعام</h2>
         <div id="menuContainer"></div>
         <div class="location-box">
-          <h3>ًں“چ ط§ظ„ظ…ظˆظ‚ط¹ ط¹ظ„ظ‰ ط§ظ„ط®ط±ظٹط·ط©</h3>
+          <h3>📍 الموقع على الخريطة</h3>
           ${(branches&&branches.length?branches:[{name:'الفرع الرئيسي',area:store.area+' — '+store.city,query:store.mapsQuery}]).map(b => `<div class="loc-item"><div class="addr"><strong>${b.name}</strong><small>${b.area}</small></div><a href="https://www.google.com/maps/search/${b.query}" target="_blank" class="btn btn-map">📍 خرائط</a></div>`).join('')}
         </div>
-      `).join('');
+        <div class="footer">${store.name} — ${store.city} 2026 · <span style="cursor:pointer" onclick="showPwd()">إدارة</span></div>
+      `;
+      renderMenu();
     }
+
     function updateQty(btn, d) {
       const item = btn.closest('.menu-item'), name = item.dataset.name, price = parseInt(item.dataset.price), valEl = item.querySelector('.qty-value');
       let val = parseInt(valEl.textContent) || 0; val = Math.max(0, val + d);
