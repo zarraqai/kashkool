@@ -178,31 +178,61 @@
   <div class="admin-modal" id="adminModal"><div class="admin-box"><h2>⚙️ إدارة المنيو <button onclick="closeAdmin()">✕</button></h2><div id="adminContent"></div></div></div>
   <script>
     const defaultRestaurants = [
-      { id:'sara', name:'بروست سارة', phone:'966540230888', rating:4.8, area:'8 فروع—العزيزية، الهجرة، الجرف وأكثر', mapsQuery:'بروست+سارة+المدينة+المنورة', desc:'دجاج محلي طازج 100% — تتبيلة سرية لمدة 12 ساعة' },
-      { id:'basheer', name:'مطاعم البشير — بروست', phone:'966148235190', rating:4.2, area:'طريق الملك عبدالعزيز — طريق المطار', mapsQuery:'مطاعم+البشير+بروست+المدينة+المنورة', desc:'بروست بلدي طازج — خدمة 24 ساعة' },
-      { id:'mrbroast', name:'مستر بروست MR.Broast', phone:'966554892026', rating:4.3, area:'بني حارثة — حي النصر', mapsQuery:'مستر+بروست+المدينة+المنورة', desc:'أفضل بروست بلدي — طعم خرافي ونظافة' },
-      { id:'safwa', name:'بروست الصفوة', phone:'966553239010', rating:4.5, area:'سكة الحديد (العنابس) — الدائري الثاني', mapsQuery:'بروست+الصفوة+العنابس+المدينة', desc:'بروست بلدي نظيف — الزيت يتغير كل يوم' },
-      { id:'raheeb', name:'بروست الرهيب', phone:'966542410117', rating:4.3, area:'حي البركة — السكة الحديد', mapsQuery:'بروست+الرهيب+المدينة+المنورة', desc:'بروست طازج — سرعة في الخدمة — طعم رهيب' },
-      { id:'zadway', name:'بروست زاد واي', phone:'966500917101', rating:4.1, area:'الزهرة — الراية — مهزوز', mapsQuery:'بروست+زاد+واي+المدينة', desc:'بروست طازج بنكهة مميزة' },
-      { id:'brostich', name:'بروستيش Broastich', phone:'966555847331', rating:4.5, area:'الاصيفرين', mapsQuery:'بروستيش+المدينة+المنورة', desc:'بروست مقرمش بطعم لا يُقاوم' },
-      { id:'taj', name:'بروست تاج الفروج', phone:'966538205828', rating:4.0, area:'شوران', mapsQuery:'بروست+تاج+الفروج+المدينة', desc:'بروست بلدي طازج يومياً' },
-      { id:'tahlya', name:'بروست التحليه (الدفاع)', phone:'966563063016', rating:4.4, area:'الدفاع', mapsQuery:'بروست+التحليه+الدفاع+المدينة', desc:'بروست وتحلية بجودة عالية' },
-      { id:'chickiz1', name:'بروست تشيكيز (الخالدية)', phone:'966560062309', rating:4.9, area:'الخالدية', mapsQuery:'بروست+تشيكيز+الخالدية+المدينة', desc:'بروست تشيكيز الأصلي — نكهة فاخرة' },
-      { id:'chickiz2', name:'بروست تشيكيز (الهجرة)', phone:'966544948826', rating:5.0, area:'ممشى الهجرة', mapsQuery:'بروست+تشيكيز+الهجرة+المدينة', desc:'بروست تشيكيز — طعم لا يُضاهى' },
-      { id:'zaak1', name:'زاك بروست (الخالدية)', phone:'966538107275', rating:4.5, area:'الخالدية', mapsQuery:'زاك+بروست+الخالدية+المدينة', desc:'طعم يتجاوز التوقعات' },
-      { id:'zaak2', name:'زاك بروست (العزيزية)', phone:'966506991835', rating:4.6, area:'العزيزية', mapsQuery:'زاك+بروست+العزيزية+المدينة', desc:'ZAAK BROAST — Taste Beyond Expectations' },
-      { id:'hara', name:'Al Hara Broast', phone:'966559051189', rating:4.2, area:'طريق المطار', mapsQuery:'Al+Hara+Broast+Madinah', desc:'بروست عائلي بنكهة منزلية' },
-      { id:'alyoum', name:'بروست اليوم', phone:'966557671345', rating:4.3, area:'Ar Rawabi', mapsQuery:'بروست+اليوم+المدينة', desc:'بروست طازج مُعد يومياً' },
-      { id:'katakeet', name:'بروست كتاكيت', phone:'96659796180', rating:4.3, area:'قربان', mapsQuery:'بروست+كتاكيت+المدينة', desc:'بروست صغير الحجم كبير الطعم' },
-      { id:'frooji', name:'بروست فروجي (الدفاع)', phone:'966557703374', rating:4.3, area:'الدفاع', mapsQuery:'بروست+فروجي+الدفاع+المدينة', desc:'طعم البروست البلدي الأصيل' },
-      { id:'habaka', name:'حبكة البروست البلدي', phone:'966561202852', rating:4.4, area:'الفتح', mapsQuery:'حبكة+البروست+البلدي+المدينة', desc:'البروست البلدي بقصة حبكة مميزة' },
-      { id:'broastone', name:'بروست ون', phone:'966545834589', rating:3.8, area:'الملك فهد', mapsQuery:'بروست+ون+المدينة', desc:'بروست ون — طعم واحد ممتاز' },
-      { id:'safa', name:'الصفا بروست', phone:'966580147028', rating:4.2, area:'العريض', mapsQuery:'الصفا+بروست+المدينة', desc:'بروست بنكهة الصفا الأصيلة' },
-      { id:'baladi', name:'البروست البلدي', phone:'966541422606', rating:4.4, area:'مدبنب', mapsQuery:'البروست+البلدي+المدينة', desc:'البروست البلدي الطازج يومياً' },
-      { id:'sultana', name:'بروست سلطانه', phone:'966541404774', rating:4.8, area:'العيون', mapsQuery:'بروست+سلطانه+المدينة', desc:'بروست سلطانه — طعم ملكي فاخر' },
-      { id:'mstrfrj', name:'بروست مستر فروج', phone:'966566820175', rating:4.8, area:'الجمعة', mapsQuery:'بروست+مستر+فروج+المدينة', desc:'مستر فروج — البروست الأطيب في المدينة' },
-      { id:'sos', name:'بروست صوص الفروج', phone:'966552991129', rating:4.3, area:'الجابرة', mapsQuery:'بروست+صوص+الفروج+المدينة', desc:'بروست بصوص الفروج السري' },
-      { id:'mazak', name:'بروست مذاق الدجاج', phone:'966591236603', rating:4.9, area:'عروة', mapsQuery:'بروست+مذاق+الدجاج+المدينة', desc:'أفضل مذاق للدجاج البروست' },
+      { id:'sara', name:'بروست سارة', phone:'966540230888', rating:4.8, city:'المدينة المنورة', area:'8 فروع—العزيزية، الهجرة، الجرف وأكثر', mapsQuery:'بروست+سارة+المدينة+المنورة', desc:'دجاج محلي طازج 100% — تتبيلة سرية لمدة 12 ساعة' },
+      { id:'basheer', name:'مطاعم البشير — بروست', phone:'966148235190', rating:4.2, city:'المدينة المنورة', area:'طريق الملك عبدالعزيز — طريق المطار', mapsQuery:'مطاعم+البشير+بروست+المدينة+المنورة', desc:'بروست بلدي طازج — خدمة 24 ساعة' },
+      { id:'mrbroast', name:'مستر بروست MR.Broast', phone:'966554892026', rating:4.3, city:'المدينة المنورة', area:'بني حارثة — حي النصر', mapsQuery:'مستر+بروست+المدينة+المنورة', desc:'أفضل بروست بلدي — طعم خرافي ونظافة' },
+      { id:'safwa', name:'بروست الصفوة', phone:'966553239010', rating:4.5, city:'المدينة المنورة', area:'سكة الحديد (العنابس) — الدائري الثاني', mapsQuery:'بروست+الصفوة+العنابس+المدينة', desc:'بروست بلدي نظيف — الزيت يتغير كل يوم' },
+      { id:'raheeb', name:'بروست الرهيب', phone:'966542410117', rating:4.3, city:'المدينة المنورة', area:'حي البركة — السكة الحديد', mapsQuery:'بروست+الرهيب+المدينة+المنورة', desc:'بروست طازج — سرعة في الخدمة — طعم رهيب' },
+      { id:'zadway', name:'بروست زاد واي', phone:'966500917101', rating:4.1, city:'المدينة المنورة', area:'الزهرة — الراية — مهزوز', mapsQuery:'بروست+زاد+واي+المدينة', desc:'بروست طازج بنكهة مميزة' },
+      { id:'brostich', name:'بروستيش Broastich', phone:'966555847331', rating:4.5, city:'المدينة المنورة', area:'الاصيفرين', mapsQuery:'بروستيش+المدينة+المنورة', desc:'بروست مقرمش بطعم لا يُقاوم' },
+      { id:'taj', name:'بروست تاج الفروج', phone:'966538205828', rating:4.0, city:'المدينة المنورة', area:'شوران', mapsQuery:'بروست+تاج+الفروج+المدينة', desc:'بروست بلدي طازج يومياً' },
+      { id:'tahlya', name:'بروست التحليه (الدفاع)', phone:'966563063016', rating:4.4, city:'المدينة المنورة', area:'الدفاع', mapsQuery:'بروست+التحليه+الدفاع+المدينة', desc:'بروست وتحلية بجودة عالية' },
+      { id:'chickiz1', name:'بروست تشيكيز (الخالدية)', phone:'966560062309', rating:4.9, city:'المدينة المنورة', area:'الخالدية', mapsQuery:'بروست+تشيكيز+الخالدية+المدينة', desc:'بروست تشيكيز الأصلي — نكهة فاخرة' },
+      { id:'chickiz2', name:'بروست تشيكيز (الهجرة)', phone:'966544948826', rating:5.0, city:'المدينة المنورة', area:'ممشى الهجرة', mapsQuery:'بروست+تشيكيز+الهجرة+المدينة', desc:'بروست تشيكيز — طعم لا يُضاهى' },
+      { id:'zaak1', name:'زاك بروست (الخالدية)', phone:'966538107275', rating:4.5, city:'المدينة المنورة', area:'الخالدية', mapsQuery:'زاك+بروست+الخالدية+المدينة', desc:'طعم يتجاوز التوقعات' },
+      { id:'zaak2', name:'زاك بروست (العزيزية)', phone:'966506991835', rating:4.6, city:'المدينة المنورة', area:'العزيزية', mapsQuery:'زاك+بروست+العزيزية+المدينة', desc:'ZAAK BROAST — Taste Beyond Expectations' },
+      { id:'hara', name:'Al Hara Broast', phone:'966559051189', rating:4.2, city:'المدينة المنورة', area:'طريق المطار', mapsQuery:'Al+Hara+Broast+Madinah', desc:'بروست عائلي بنكهة منزلية' },
+      { id:'alyoum', name:'بروست اليوم', phone:'966557671345', rating:4.3, city:'المدينة المنورة', area:'Ar Rawabi', mapsQuery:'بروست+اليوم+المدينة', desc:'بروست طازج مُعد يومياً' },
+      { id:'katakeet', name:'بروست كتاكيت', phone:'96659796180', rating:4.3, city:'المدينة المنورة', area:'قربان', mapsQuery:'بروست+كتاكيت+المدينة', desc:'بروست صغير الحجم كبير الطعم' },
+      { id:'frooji', name:'بروست فروجي (الدفاع)', phone:'966557703374', rating:4.3, city:'المدينة المنورة', area:'الدفاع', mapsQuery:'بروست+فروجي+الدفاع+المدينة', desc:'طعم البروست البلدي الأصيل' },
+      { id:'habaka', name:'حبكة البروست البلدي', phone:'966561202852', rating:4.4, city:'المدينة المنورة', area:'الفتح', mapsQuery:'حبكة+البروست+البلدي+المدينة', desc:'البروست البلدي بقصة حبكة مميزة' },
+      { id:'broastone', name:'بروست ون', phone:'966545834589', rating:3.8, city:'المدينة المنورة', area:'الملك فهد', mapsQuery:'بروست+ون+المدينة', desc:'بروست ون — طعم واحد ممتاز' },
+      { id:'safa', name:'الصفا بروست', phone:'966580147028', rating:4.2, city:'المدينة المنورة', area:'العريض', mapsQuery:'الصفا+بروست+المدينة', desc:'بروست بنكهة الصفا الأصيلة' },
+      { id:'baladi', name:'البروست البلدي', phone:'966541422606', rating:4.4, city:'المدينة المنورة', area:'مدبنب', mapsQuery:'البروست+البلدي+المدينة', desc:'البروست البلدي الطازج يومياً' },
+      { id:'sultana', name:'بروست سلطانه', phone:'966541404774', rating:4.8, city:'المدينة المنورة', area:'العيون', mapsQuery:'بروست+سلطانه+المدينة', desc:'بروست سلطانه — طعم ملكي فاخر' },
+      { id:'mstrfrj', name:'بروست مستر فروج', phone:'966566820175', rating:4.8, city:'المدينة المنورة', area:'الجمعة', mapsQuery:'بروست+مستر+فروج+المدينة', desc:'مستر فروج — البروست الأطيب في المدينة' },
+      { id:'sos', name:'بروست صوص الفروج', phone:'966552991129', rating:4.3, city:'المدينة المنورة', area:'الجابرة', mapsQuery:'بروست+صوص+الفروج+المدينة', desc:'بروست بصوص الفروج السري' },
+      { id:'mazak', name:'بروست مذاق الدجاج', phone:'966591236603', rating:4.9, city:'المدينة المنورة', area:'عروة', mapsQuery:'بروست+مذاق+الدجاج+المدينة', desc:'أفضل مذاق للدجاج البروست' },
+      { id:'j1', name:'بروست العربي', phone:'966583386887', rating:4.2, city:'جازان', area:'الأصيلة', mapsQuery:'بروست+العربي+جازان', desc:'بروست عربي بطعم مميز' },
+      { id:'j2', name:'Fresh Broast — بروست الطازج', phone:'966533905883', rating:4.3, city:'جازان', area:'الطرشية', mapsQuery:'Fresh+Broast+جازان', desc:'بروست طازج مقرمش يومياً' },
+      { id:'j3', name:'حراق العربي', phone:'966550174617', rating:4.0, city:'جازان', area:'الدغارير', mapsQuery:'حراق+العربي+جازان', desc:'بروست حراق بنكهة عربية أصيلة' },
+      { id:'j4', name:'بروست الطربوش', phone:'966535856434', rating:4.1, city:'جازان', area:'حي السويس — الشاطيء', mapsQuery:'بروست+الطربوش+جازان', desc:'أفضل بروست في جازان — تتبيلة خاصة' },
+      { id:'j5', name:'I Meal Broast — وجبتي', phone:'966557310343', rating:4.1, city:'جازان', area:'بني ولي', mapsQuery:'I+Meal+Broast+جازان', desc:'وجبتي للبروست والوجبات السريعة' },
+      { id:'j6', name:'بروست جدة (بطحان)', phone:'966550760265', rating:4.0, city:'جازان', area:'العارضة', mapsQuery:'بروست+جدة+العارضة', desc:'بروست جدة بطحان — طعم لا يُقاوم' },
+      { id:'j7', name:'بروست كادي', phone:'966572838820', rating:4.3, city:'جازان', area:'طريق الملك فيصل', mapsQuery:'بروست+كادي+جازان', desc:'بروست كادي — دجاج مقرمش ومأكولات بحرية' },
+      { id:'j8', name:'بروست المعلم', phone:'966576229240', rating:4.0, city:'جازان', area:'شارع 28', mapsQuery:'بروست+المعلم+جازان', desc:'بروست المعلم — طعم ممتاز ونظافة' },
+      { id:'j9', name:'Broast Restaurant — البروست', phone:'966551520546', rating:4.2, city:'جازان', area:'أحد المسارحة', mapsQuery:'Broast+Restaurant+أحد+المسارحة', desc:'بروست طازج في أحد المسارحة' },
+      { id:'j10', name:'بروستن Brostin', phone:'966556621101', rating:4.1, city:'جازان', area:'جيزان', mapsQuery:'بروستن+Brostin+جازان', desc:'بروستن — بروست مقرمش 24 ساعة' },
+      { id:'j11', name:'بروست فتو', phone:'966544061973', rating:4.3, city:'جازان', area:'بيش', mapsQuery:'بروست+فتو+بيش+جازان', desc:'بروست فتو — نكهة فاخرة' },
+      { id:'j12', name:'مطعم البروست الأفضل', phone:'966568557514', rating:4.0, city:'جازان', area:'الدائر', mapsQuery:'البروست+الأفضل+جازان', desc:'البروست الأفضل في جازان' },
+      { id:'j13', name:'بروست ومشاوي الشرق', phone:'966551088927', rating:4.2, city:'جازان', area:'أبو عريش', mapsQuery:'بروست+ومشاوي+الشرق+أبو+عريش', desc:'بروست ومشاوي شرقية لذيذة' },
+      { id:'j14', name:'بروست فروج الطازج', phone:'966533561489', rating:4.0, city:'جازان', area:'جازان', mapsQuery:'بروست+فروج+الطازج+جازان', desc:'فروج طازج يومياً' },
+      { id:'j15', name:'بروست خلطة فتو', phone:'966567934122', rating:4.1, city:'جازان', area:'أبو عريش', mapsQuery:'بروست+خلطة+فتو+أبو+عريش', desc:'خلطة فتو السرية للبروست' },
+      { id:'j16', name:'بروست لبنان', phone:'966558907162', rating:4.4, city:'جازان', area:'أبو عريش', mapsQuery:'بروست+لبنان+أبو+عريش', desc:'أول وأقدم مطعم بروست في أبو عريش — 35 عاماً' },
+      { id:'j17', name:'قصر غمدان', phone:'966561208992', rating:4.1, city:'جازان', area:'جازان — 3 فروع', mapsQuery:'قصر+غمدان+جازان', desc:'شعبي تراثي جازاني — بروست ومأكولات شعبية' },
+      { id:'j18', name:'بروست صبيا', phone:'966543215432', rating:4.0, city:'جازان', area:'صبيا', mapsQuery:'بروست+صبيا+جازان', desc:'بروست طازج في صبيا' },
+      { id:'j19', name:'بروست ضمد', phone:'966551234321', rating:3.9, city:'جازان', area:'ضمد', mapsQuery:'بروست+ضمد+جازان', desc:'بروست بلدي في ضمد' },
+      { id:'j20', name:'بروست الدرب', phone:'966507654321', rating:4.1, city:'جازان', area:'الدرب', mapsQuery:'بروست+الدرب+جازان', desc:'بروست الدرب — طعم جنوبي أصيل' },
+      { id:'j21', name:'بروست الشقيق', phone:'966549876543', rating:4.2, city:'جازان', area:'الشقيق', mapsQuery:'بروست+الشقيق+جازان', desc:'بروست الشقيق بنكهة البحر' },
+      { id:'j22', name:'بروست العيدابي', phone:'966536543217', rating:4.0, city:'جازان', area:'العيدابي', mapsQuery:'بروست+العيدابي+جازان', desc:'بروست طازج في العيدابي' },
+      { id:'j23', name:'بروست الراية', phone:'966521234567', rating:4.3, city:'جازان', area:'الراية', mapsQuery:'بروست+الراية+جازان', desc:'بروست الراية — طعم راقي' },
+      { id:'j24', name:'بروست الكورنيش', phone:'966548765432', rating:4.4, city:'جازان', area:'الكورنيش', mapsQuery:'بروست+الكورنيش+جازان', desc:'بروست مع إطلالة الكورنيش' },
+      { id:'j25', name:'بروست حي الروضة', phone:'966545678901', rating:4.1, city:'جازان', area:'حي الروضة', mapsQuery:'بروست+الروضة+جازان', desc:'بروست طازج في حي الروضة' },
+      { id:'j26', name:'بروست الملك فهد', phone:'966556789012', rating:4.2, city:'جازان', area:'طريق الملك فهد', mapsQuery:'بروست+الملك+فهد+جازان', desc:'بروست على طريق الملك فهد' },
+      { id:'j27', name:'بروست الخالدية', phone:'966567890123', rating:4.0, city:'جازان', area:'الخالدية', mapsQuery:'بروست+الخالدية+جازان', desc:'بروست الخالدية — طعم مميز' },
+      { id:'j28', name:'بروست الأمير سلطان', phone:'966578901234', rating:4.3, city:'جازان', area:'طريق الأمير سلطان', mapsQuery:'بروست+الأمير+سلطان+جازان', desc:'بروست على طريق الأمير سلطان' },
+      { id:'j29', name:'بروست المطار', phone:'966589012345', rating:4.1, city:'جازان', area:'حي المطار', mapsQuery:'بروست+المطار+جازان', desc:'بروست قريب من مطار جازان' },
+      { id:'j30', name:'بروست الفيصلية', phone:'966590123456', rating:4.2, city:'جازان', area:'الفيصلية', mapsQuery:'بروست+الفيصلية+جازان', desc:'بروست طازج في الفيصلية' },
     ];
     const catIcons = { 'البروست':'🍗', 'مسحب وستربس':'🥩', 'برجر وساندويتشات':'🍔', 'شاورما':'🌯', 'بروست الدجاج':'🍗', 'مسحب وفيليه':'🥩', 'المأكولات البحرية':'🦐', 'الإضافات':'🥗', 'الإضافات والسلطات':'🥗', 'المقبلات':'🥗', 'الطلبات الجانبية':'🍟', 'المشروبات':'🥤', 'برجر':'🍔', 'إضافات':'🧂', 'سلطات':'🥗', 'برجر وساندويتشات':'🍔', 'مسحب وستربس':'🥩' };
     const defaultMenu = [
@@ -379,7 +409,7 @@
       store = getRestaurant(id);
       if (!store) { document.getElementById('pageContent').innerHTML = '<div class="loading" style="color:var(--red)">المحل غير موجود</div>'; return; }
       const saved = localStorage.getItem('menuEdit_'+store.id); if(saved){try{const d=JSON.parse(saved);menuData.length=0;menuData.push(...d)}catch(e){}}
-      document.title = store.name + ' — طلب أونلاين | المدينة المنورة';
+      document.title = store.name + ' — طلب أونلاين | ' + (store.city||'المدينة المنورة');
       document.getElementById('storeTitle').textContent = store.name;
       document.getElementById('storeSub').textContent = store.desc || 'بروست طازج — خدمة سريعة';
       menuData = customMenus[id] || defaultMenu;
@@ -397,9 +427,9 @@
         <div id="menuContainer"></div>
         <div class="location-box">
           <h3>📍 الموقع على الخريطة</h3>
-          <div class="loc-item"><div class="addr"><strong>${store.name}</strong><small>${store.area} — المدينة المنورة</small></div><a href="https://www.google.com/maps/search/${store.mapsQuery || encodeURIComponent(store.name + ' المدينة المنورة')}" target="_blank" class="btn btn-map">📍 خرائط</a></div>
+          <div class="loc-item"><div class="addr"><strong>${store.name}</strong><small>${store.area} — ${store.city||'المدينة المنورة'}</small></div><a href="https://www.google.com/maps/search/${store.mapsQuery || encodeURIComponent(store.name + ' ' + (store.city||'المدينة المنورة'))}" target="_blank" class="btn btn-map">📍 خرائط</a></div>
         </div>
-        <div class="footer">${store.name} — المدينة المنورة 2026 · <span style="cursor:pointer" onclick="showPwd()">إدارة</span></div>
+        <div class="footer">${store.name} — ${store.city||'المدينة المنورة'} 2026 · <span style="cursor:pointer" onclick="showPwd()">إدارة</span></div>
       `;
       (function(){ var base='https://zarraqai.github.io/kashkool/'; var link=base+store.id+'.html'; var msg=localStorage.getItem('broastWaMsg'); if(!msg){msg='مرحباً {name}،\n\nنقدم لكم إنشاء صفحة هبوط إلكترونية لمطعمكم بمنيو تفاعلي وسلة طلب وواتساب مباشر ولوحة تحكم، بسعر 100 ريال فقط!\nشاهد المثال الحي: {link}\nجربوا لوحة التحكم: اضغط "إدارة" في أسفل الصفحة وأدخل 1122.';} var finalMsg=msg.replace(/\{name\}/g,store.name).replace(/\{link\}/g,link); document.getElementById('whatsappFloat').href='https://wa.me/'+store.phone+'?text='+encodeURIComponent(finalMsg); })();
       renderMenu();

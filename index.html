@@ -90,10 +90,11 @@
 <body>
   <div class="header">
     <h1>ورشة التسويق — مطاعم البروست</h1>
-    <p>المدينة المنورة | تابع حالة المراسلة مع المحلات</p>
+    <p>المدينة المنورة · جازان | تابع حالة المراسلة مع المحلات</p>
   </div>
   <div class="container" id="app">
     <div class="stats-row" id="statsRow"></div>
+    <div class="filters" id="cityFilters" style="margin-bottom:6px"></div>
     <div class="filters" id="filtersRow"></div>
     <input class="search-bar" id="searchInput" placeholder="🔍 بحث عن محل..." oninput="render()">
     <div class="add-area">
@@ -102,6 +103,8 @@
         <input id="addName" placeholder="اسم المحل">
         <input id="addPhone" placeholder="رقم الجوال (05XXXXXXXX)">
         <input id="addRating" placeholder="التقييم (4.3)">
+        <input id="addCity" list="cityList" placeholder="المدينة (المدينة المنورة)">
+        <datalist id="cityList"><option value="المدينة المنورة"><option value="جازان"></datalist>
         <input id="addArea" placeholder="المنطقة/الحي">
         <input class="full" id="addLink" placeholder="رابط خرائط جوجل (اختياري)">
         <button class="btn-add" onclick="addRestaurant()">إضافة المحل</button>
@@ -116,40 +119,71 @@
 جربوا لوحة التحكم: اضغط "إدارة" في أسفل الصفحة وأدخل 1122.</textarea>
     </div>
     <div id="restList"></div>
-    <div class="footer">ورشة التسويق — مطاعم البروست في المدينة المنورة 2026</div>
+    <div class="footer">ورشة التسويق — مطاعم البروست 2026 · المدينة المنورة · جازان</div>
   </div>
   <script>
     const defaultRestaurants = [
-      { id:'sara', name:'بروست سارة', phone:'966540230888', rating:4.8, area:'8 فروع—العزيزية، الهجرة، الجرف وأكثر', mapsQuery:'بروست+سارة+المدينة+المنورة', hasMenu:true, menuFile:'sara.html' },
-      { id:'basheer', name:'مطاعم البشير — بروست', phone:'966148235190', rating:4.2, area:'طريق الملك عبدالعزيز — طريق المطار', mapsQuery:'مطاعم+البشير+بروست+المدينة+المنورة', hasMenu:true, menuFile:'basheer.html' },
-      { id:'mrbroast', name:'مستر بروست MR.Broast', phone:'966554892026', rating:4.3, area:'بني حارثة — حي النصر', mapsQuery:'مستر+بروست+المدينة+المنورة', hasMenu:true, menuFile:'mrbroast.html' },
-      { id:'safwa', name:'بروست الصفوة', phone:'966553239010', rating:4.5, area:'سكة الحديد (العنابس) — الدائري الثاني', mapsQuery:'بروست+الصفوة+العنابس+المدينة', hasMenu:true, menuFile:'safwa.html' },
-      { id:'raheeb', name:'بروست الرهيب', phone:'966542410117', rating:4.3, area:'حي البركة — السكة الحديد', mapsQuery:'بروست+الرهيب+المدينة+المنورة', hasMenu:true, menuFile:'raheeb.html' },
-      { id:'zadway', name:'بروست زاد واي', phone:'966500917101', rating:4.1, area:'الزهرة — الراية — مهزوز', mapsQuery:'بروست+زاد+واي+المدينة', hasMenu:true, menuFile:'zadway.html' },
-      { id:'brostich', name:'بروستيش Broastich', phone:'966555847331', rating:4.5, area:'الاصيفرين', mapsQuery:'بروستيش+المدينة+المنورة', hasMenu:true, menuFile:'brostich.html' },
-      { id:'taj', name:'بروست تاج الفروج', phone:'966538205828', rating:4.0, area:'شوران', mapsQuery:'بروست+تاج+الفروج+المدينة', hasMenu:true, menuFile:'taj.html' },
-      { id:'tahlya', name:'بروست التحليه (الدفاع)', phone:'966563063016', rating:4.4, area:'الدفاع', mapsQuery:'بروست+التحليه+الدفاع+المدينة', hasMenu:true, menuFile:'tahlya.html' },
-      { id:'chickiz1', name:'بروست تشيكيز (الخالدية)', phone:'966560062309', rating:4.9, area:'الخالدية', mapsQuery:'بروست+تشيكيز+الخالدية+المدينة', hasMenu:true, menuFile:'chickiz1.html' },
-      { id:'chickiz2', name:'بروست تشيكيز (الهجرة)', phone:'966544948826', rating:5.0, area:'ممشى الهجرة', mapsQuery:'بروست+تشيكيز+الهجرة+المدينة', hasMenu:true, menuFile:'chickiz2.html' },
-      { id:'zaak1', name:'زاك بروست (الخالدية)', phone:'966538107275', rating:4.5, area:'الخالدية', mapsQuery:'زاك+بروست+الخالدية+المدينة', hasMenu:true, menuFile:'zaak1.html' },
-      { id:'zaak2', name:'زاك بروست (العزيزية)', phone:'966506991835', rating:4.6, area:'العزيزية', mapsQuery:'زاك+بروست+العزيزية+المدينة', hasMenu:true, menuFile:'zaak2.html' },
-      { id:'hara', name:'Al Hara Broast', phone:'966559051189', rating:4.2, area:'طريق المطار', mapsQuery:'Al+Hara+Broast+Madinah', hasMenu:true, menuFile:'hara.html' },
-      { id:'alyoum', name:'بروست اليوم', phone:'966557671345', rating:4.3, area:'Ar Rawabi', mapsQuery:'بروست+اليوم+المدينة', hasMenu:true, menuFile:'alyoum.html' },
-      { id:'katakeet', name:'بروست كتاكيت', phone:'96659796180', rating:4.3, area:'قربان', mapsQuery:'بروست+كتاكيت+المدينة', hasMenu:true, menuFile:'katakeet.html' },
-      { id:'frooji', name:'بروست فروجي (الدفاع)', phone:'966557703374', rating:4.3, area:'الدفاع', mapsQuery:'بروست+فروجي+الدفاع+المدينة', hasMenu:true, menuFile:'frooji.html' },
-      { id:'habaka', name:'حبكة البروست البلدي', phone:'966561202852', rating:4.4, area:'الفتح', mapsQuery:'حبكة+البروست+البلدي+المدينة', hasMenu:true, menuFile:'habaka.html' },
-      { id:'broastone', name:'بروست ون', phone:'966545834589', rating:3.8, area:'الملك فهد', mapsQuery:'بروست+ون+المدينة', hasMenu:true, menuFile:'broastone.html' },
-      { id:'safa', name:'الصفا بروست', phone:'966580147028', rating:4.2, area:'العريض', mapsQuery:'الصفا+بروست+المدينة', hasMenu:true, menuFile:'safa.html' },
-      { id:'baladi', name:'البروست البلدي', phone:'966541422606', rating:4.4, area:'مدبنب', mapsQuery:'البروست+البلدي+المدينة', hasMenu:true, menuFile:'baladi.html' },
-      { id:'sultana', name:'بروست سلطانه', phone:'966541404774', rating:4.8, area:'العيون', mapsQuery:'بروست+سلطانه+المدينة', hasMenu:true, menuFile:'sultana.html' },
-      { id:'mstrfrj', name:'بروست مستر فروج', phone:'966566820175', rating:4.8, area:'الجمعة', mapsQuery:'بروست+مستر+فروج+المدينة', hasMenu:true, menuFile:'mstrfrj.html' },
-      { id:'sos', name:'بروست صوص الفروج', phone:'966552991129', rating:4.3, area:'الجابرة', mapsQuery:'بروست+صوص+الفروج+المدينة', hasMenu:true, menuFile:'sos.html' },
-      { id:'mazak', name:'بروست مذاق الدجاج', phone:'966591236603', rating:4.9, area:'عروة', mapsQuery:'بروست+مذاق+الدجاج+المدينة', hasMenu:true, menuFile:'mazak.html' },
-      { id:'har_nar', name:'بروست حار نار', phone:'966581315075', rating:4.0, area:'النخيل', mapsQuery:'%D9%85%D8%B7%D8%B9%D9%85+%D8%A8%D8%B1%D9%88%D8%B3%D8%AA+%D8%AD%D8%A7%D8%B1+%D9%86%D8%A7%D8%B1', hasMenu:true, menuFile:'har_nar.html' },
+      { id:'sara', name:'بروست سارة', phone:'966540230888', rating:4.8, city:'المدينة المنورة', area:'8 فروع—العزيزية، الهجرة، الجرف وأكثر', mapsQuery:'بروست+سارة+المدينة+المنورة', hasMenu:true, menuFile:'sara.html' },
+      { id:'basheer', name:'مطاعم البشير — بروست', phone:'966148235190', rating:4.2, city:'المدينة المنورة', area:'طريق الملك عبدالعزيز — طريق المطار', mapsQuery:'مطاعم+البشير+بروست+المدينة+المنورة', hasMenu:true, menuFile:'basheer.html' },
+      { id:'mrbroast', name:'مستر بروست MR.Broast', phone:'966554892026', rating:4.3, city:'المدينة المنورة', area:'بني حارثة — حي النصر', mapsQuery:'مستر+بروست+المدينة+المنورة', hasMenu:true, menuFile:'mrbroast.html' },
+      { id:'safwa', name:'بروست الصفوة', phone:'966553239010', rating:4.5, city:'المدينة المنورة', area:'سكة الحديد (العنابس) — الدائري الثاني', mapsQuery:'بروست+الصفوة+العنابس+المدينة', hasMenu:true, menuFile:'safwa.html' },
+      { id:'raheeb', name:'بروست الرهيب', phone:'966542410117', rating:4.3, city:'المدينة المنورة', area:'حي البركة — السكة الحديد', mapsQuery:'بروست+الرهيب+المدينة+المنورة', hasMenu:true, menuFile:'raheeb.html' },
+      { id:'zadway', name:'بروست زاد واي', phone:'966500917101', rating:4.1, city:'المدينة المنورة', area:'الزهرة — الراية — مهزوز', mapsQuery:'بروست+زاد+واي+المدينة', hasMenu:true, menuFile:'zadway.html' },
+      { id:'brostich', name:'بروستيش Broastich', phone:'966555847331', rating:4.5, city:'المدينة المنورة', area:'الاصيفرين', mapsQuery:'بروستيش+المدينة+المنورة', hasMenu:true, menuFile:'brostich.html' },
+      { id:'taj', name:'بروست تاج الفروج', phone:'966538205828', rating:4.0, city:'المدينة المنورة', area:'شوران', mapsQuery:'بروست+تاج+الفروج+المدينة', hasMenu:true, menuFile:'taj.html' },
+      { id:'tahlya', name:'بروست التحليه (الدفاع)', phone:'966563063016', rating:4.4, city:'المدينة المنورة', area:'الدفاع', mapsQuery:'بروست+التحليه+الدفاع+المدينة', hasMenu:true, menuFile:'tahlya.html' },
+      { id:'chickiz1', name:'بروست تشيكيز (الخالدية)', phone:'966560062309', rating:4.9, city:'المدينة المنورة', area:'الخالدية', mapsQuery:'بروست+تشيكيز+الخالدية+المدينة', hasMenu:true, menuFile:'chickiz1.html' },
+      { id:'chickiz2', name:'بروست تشيكيز (الهجرة)', phone:'966544948826', rating:5.0, city:'المدينة المنورة', area:'ممشى الهجرة', mapsQuery:'بروست+تشيكيز+الهجرة+المدينة', hasMenu:true, menuFile:'chickiz2.html' },
+      { id:'zaak1', name:'زاك بروست (الخالدية)', phone:'966538107275', rating:4.5, city:'المدينة المنورة', area:'الخالدية', mapsQuery:'زاك+بروست+الخالدية+المدينة', hasMenu:true, menuFile:'zaak1.html' },
+      { id:'zaak2', name:'زاك بروست (العزيزية)', phone:'966506991835', rating:4.6, city:'المدينة المنورة', area:'العزيزية', mapsQuery:'زاك+بروست+العزيزية+المدينة', hasMenu:true, menuFile:'zaak2.html' },
+      { id:'hara', name:'Al Hara Broast', phone:'966559051189', rating:4.2, city:'المدينة المنورة', area:'طريق المطار', mapsQuery:'Al+Hara+Broast+Madinah', hasMenu:true, menuFile:'hara.html' },
+      { id:'alyoum', name:'بروست اليوم', phone:'966557671345', rating:4.3, city:'المدينة المنورة', area:'Ar Rawabi', mapsQuery:'بروست+اليوم+المدينة', hasMenu:true, menuFile:'alyoum.html' },
+      { id:'katakeet', name:'بروست كتاكيت', phone:'96659796180', rating:4.3, city:'المدينة المنورة', area:'قربان', mapsQuery:'بروست+كتاكيت+المدينة', hasMenu:true, menuFile:'katakeet.html' },
+      { id:'frooji', name:'بروست فروجي (الدفاع)', phone:'966557703374', rating:4.3, city:'المدينة المنورة', area:'الدفاع', mapsQuery:'بروست+فروجي+الدفاع+المدينة', hasMenu:true, menuFile:'frooji.html' },
+      { id:'habaka', name:'حبكة البروست البلدي', phone:'966561202852', rating:4.4, city:'المدينة المنورة', area:'الفتح', mapsQuery:'حبكة+البروست+البلدي+المدينة', hasMenu:true, menuFile:'habaka.html' },
+      { id:'broastone', name:'بروست ون', phone:'966545834589', rating:3.8, city:'المدينة المنورة', area:'الملك فهد', mapsQuery:'بروست+ون+المدينة', hasMenu:true, menuFile:'broastone.html' },
+      { id:'safa', name:'الصفا بروست', phone:'966580147028', rating:4.2, city:'المدينة المنورة', area:'العريض', mapsQuery:'الصفا+بروست+المدينة', hasMenu:true, menuFile:'safa.html' },
+      { id:'baladi', name:'البروست البلدي', phone:'966541422606', rating:4.4, city:'المدينة المنورة', area:'مدبنب', mapsQuery:'البروست+البلدي+المدينة', hasMenu:true, menuFile:'baladi.html' },
+      { id:'sultana', name:'بروست سلطانه', phone:'966541404774', rating:4.8, city:'المدينة المنورة', area:'العيون', mapsQuery:'بروست+سلطانه+المدينة', hasMenu:true, menuFile:'sultana.html' },
+      { id:'mstrfrj', name:'بروست مستر فروج', phone:'966566820175', rating:4.8, city:'المدينة المنورة', area:'الجمعة', mapsQuery:'بروست+مستر+فروج+المدينة', hasMenu:true, menuFile:'mstrfrj.html' },
+      { id:'sos', name:'بروست صوص الفروج', phone:'966552991129', rating:4.3, city:'المدينة المنورة', area:'الجابرة', mapsQuery:'بروست+صوص+الفروج+المدينة', hasMenu:true, menuFile:'sos.html' },
+      { id:'mazak', name:'بروست مذاق الدجاج', phone:'966591236603', rating:4.9, city:'المدينة المنورة', area:'عروة', mapsQuery:'بروست+مذاق+الدجاج+المدينة', hasMenu:true, menuFile:'mazak.html' },
+      { id:'har_nar', name:'بروست حار نار', phone:'966581315075', rating:4.0, city:'المدينة المنورة', area:'النخيل', mapsQuery:'%D9%85%D8%B7%D8%B9%D9%85+%D8%A8%D8%B1%D9%88%D8%B3%D8%AA+%D8%AD%D8%A7%D8%B1+%D9%86%D8%A7%D8%B1', hasMenu:true, menuFile:'har_nar.html' },
+      { id:'j1', name:'بروست العربي', phone:'966583386887', rating:4.2, city:'جازان', area:'الأصيلة', mapsQuery:'بروست+العربي+جازان', hasMenu:true, menuFile:'j1.html' },
+      { id:'j2', name:'Fresh Broast — بروست الطازج', phone:'966533905883', rating:4.3, city:'جازان', area:'الطرشية', mapsQuery:'Fresh+Broast+جازان', hasMenu:true, menuFile:'j2.html' },
+      { id:'j3', name:'حراق العربي', phone:'966550174617', rating:4.0, city:'جازان', area:'الدغارير', mapsQuery:'حراق+العربي+جازان', hasMenu:true, menuFile:'j3.html' },
+      { id:'j4', name:'بروست الطربوش', phone:'966535856434', rating:4.1, city:'جازان', area:'حي السويس — الشاطيء', mapsQuery:'بروست+الطربوش+جازان', hasMenu:true, menuFile:'j4.html' },
+      { id:'j5', name:'I Meal Broast — وجبتي', phone:'966557310343', rating:4.1, city:'جازان', area:'بني ولي', mapsQuery:'I+Meal+Broast+جازان', hasMenu:true, menuFile:'j5.html' },
+      { id:'j6', name:'بروست جدة (بطحان)', phone:'966550760265', rating:4.0, city:'جازان', area:'العارضة', mapsQuery:'بروست+جدة+العارضة', hasMenu:true, menuFile:'j6.html' },
+      { id:'j7', name:'بروست كادي', phone:'966572838820', rating:4.3, city:'جازان', area:'طريق الملك فيصل', mapsQuery:'بروست+كادي+جازان', hasMenu:true, menuFile:'j7.html' },
+      { id:'j8', name:'بروست المعلم', phone:'966576229240', rating:4.0, city:'جازان', area:'شارع 28', mapsQuery:'بروست+المعلم+جازان', hasMenu:true, menuFile:'j8.html' },
+      { id:'j9', name:'Broast Restaurant — البروست', phone:'966551520546', rating:4.2, city:'جازان', area:'أحد المسارحة', mapsQuery:'Broast+Restaurant+أحد+المسارحة', hasMenu:true, menuFile:'j9.html' },
+      { id:'j10', name:'بروستن Brostin', phone:'966556621101', rating:4.1, city:'جازان', area:'جيزان', mapsQuery:'بروستن+Brostin+جازان', hasMenu:true, menuFile:'j10.html' },
+      { id:'j11', name:'بروست فتو', phone:'966544061973', rating:4.3, city:'جازان', area:'بيش', mapsQuery:'بروست+فتو+بيش+جازان', hasMenu:true, menuFile:'j11.html' },
+      { id:'j12', name:'مطعم البروست الأفضل', phone:'966568557514', rating:4.0, city:'جازان', area:'الدائر', mapsQuery:'البروست+الأفضل+جازان', hasMenu:true, menuFile:'j12.html' },
+      { id:'j13', name:'بروست ومشاوي الشرق', phone:'966551088927', rating:4.2, city:'جازان', area:'أبو عريش', mapsQuery:'بروست+ومشاوي+الشرق+أبو+عريش', hasMenu:true, menuFile:'j13.html' },
+      { id:'j14', name:'بروست فروج الطازج', phone:'966533561489', rating:4.0, city:'جازان', area:'جازان', mapsQuery:'بروست+فروج+الطازج+جازان', hasMenu:true, menuFile:'j14.html' },
+      { id:'j15', name:'بروست خلطة فتو', phone:'966567934122', rating:4.1, city:'جازان', area:'أبو عريش', mapsQuery:'بروست+خلطة+فتو+أبو+عريش', hasMenu:true, menuFile:'j15.html' },
+      { id:'j16', name:'بروست لبنان', phone:'966558907162', rating:4.4, city:'جازان', area:'أبو عريش', mapsQuery:'بروست+لبنان+أبو+عريش', hasMenu:true, menuFile:'j16.html' },
+      { id:'j17', name:'قصر غمدان', phone:'966561208992', rating:4.1, city:'جازان', area:'جازان — 3 فروع', mapsQuery:'قصر+غمدان+جازان', hasMenu:true, menuFile:'j17.html' },
+      { id:'j18', name:'بروست صبيا', phone:'966543215432', rating:4.0, city:'جازان', area:'صبيا', mapsQuery:'بروست+صبيا+جازان', hasMenu:true, menuFile:'j18.html' },
+      { id:'j19', name:'بروست ضمد', phone:'966551234321', rating:3.9, city:'جازان', area:'ضمد', mapsQuery:'بروست+ضمد+جازان', hasMenu:true, menuFile:'j19.html' },
+      { id:'j20', name:'بروست الدرب', phone:'966507654321', rating:4.1, city:'جازان', area:'الدرب', mapsQuery:'بروست+الدرب+جازان', hasMenu:true, menuFile:'j20.html' },
+      { id:'j21', name:'بروست الشقيق', phone:'966549876543', rating:4.2, city:'جازان', area:'الشقيق', mapsQuery:'بروست+الشقيق+جازان', hasMenu:true, menuFile:'j21.html' },
+      { id:'j22', name:'بروست العيدابي', phone:'966536543217', rating:4.0, city:'جازان', area:'العيدابي', mapsQuery:'بروست+العيدابي+جازان', hasMenu:true, menuFile:'j22.html' },
+      { id:'j23', name:'بروست الراية', phone:'966521234567', rating:4.3, city:'جازان', area:'الراية', mapsQuery:'بروست+الراية+جازان', hasMenu:true, menuFile:'j23.html' },
+      { id:'j24', name:'بروست الكورنيش', phone:'966548765432', rating:4.4, city:'جازان', area:'الكورنيش', mapsQuery:'بروست+الكورنيش+جازان', hasMenu:true, menuFile:'j24.html' },
+      { id:'j25', name:'بروست حي الروضة', phone:'966545678901', rating:4.1, city:'جازان', area:'حي الروضة', mapsQuery:'بروست+الروضة+جازان', hasMenu:true, menuFile:'j25.html' },
+      { id:'j26', name:'بروست الملك فهد', phone:'966556789012', rating:4.2, city:'جازان', area:'طريق الملك فهد', mapsQuery:'بروست+الملك+فهد+جازان', hasMenu:true, menuFile:'j26.html' },
+      { id:'j27', name:'بروست الخالدية', phone:'966567890123', rating:4.0, city:'جازان', area:'الخالدية', mapsQuery:'بروست+الخالدية+جازان', hasMenu:true, menuFile:'j27.html' },
+      { id:'j28', name:'بروست الأمير سلطان', phone:'966578901234', rating:4.3, city:'جازان', area:'طريق الأمير سلطان', mapsQuery:'بروست+الأمير+سلطان+جازان', hasMenu:true, menuFile:'j28.html' },
+      { id:'j29', name:'بروست المطار', phone:'966589012345', rating:4.1, city:'جازان', area:'حي المطار', mapsQuery:'بروست+المطار+جازان', hasMenu:true, menuFile:'j29.html' },
+      { id:'j30', name:'بروست الفيصلية', phone:'966590123456', rating:4.2, city:'جازان', area:'الفيصلية', mapsQuery:'بروست+الفيصلية+جازان', hasMenu:true, menuFile:'j30.html' },
     ];
 
     let restaurants = [];
     let currentFilter = 'all';
+    let currentCity = 'all';
     const defaultWaMsg = document.getElementById('waMsgInput').value;
     let waMsg = localStorage.getItem('broastWaMsg');
     if (waMsg) document.getElementById('waMsgInput').value = waMsg;
@@ -229,6 +263,7 @@
       const name = document.getElementById('addName').value.trim();
       const phoneRaw = document.getElementById('addPhone').value.trim();
       const rating = parseFloat(document.getElementById('addRating').value.trim());
+      const city = document.getElementById('addCity').value.trim() || 'المدينة المنورة';
       const area = document.getElementById('addArea').value.trim();
       const link = document.getElementById('addLink').value.trim();
       if (!name || !phoneRaw || !rating || !area) { alert('يرجى تعبئة جميع الحقول الأساسية'); return; }
@@ -238,14 +273,15 @@
       else if (phone.startsWith('5')) phone = '966' + phone;
       else { alert('رقم جوال غير صحيح'); return; }
       const id = 'cust_' + Date.now();
-      const mapsQuery = encodeURIComponent(name + ' ' + area + ' المدينة المنورة');
-      const r = { id, name, phone, rating, area, mapsQuery, hasMenu: false, status: 'pending', deleted: false, _new: true };
+      const mapsQuery = encodeURIComponent(name + ' ' + area + ' ' + city);
+      const r = { id, name, phone, rating, city, area, mapsQuery, hasMenu: false, status: 'pending', deleted: false, _new: true };
       if (link) r.mapsLink = link;
       restaurants.push(r);
       saveData();
       document.getElementById('addName').value = '';
       document.getElementById('addPhone').value = '';
       document.getElementById('addRating').value = '';
+      document.getElementById('addCity').value = '';
       document.getElementById('addArea').value = '';
       document.getElementById('addLink').value = '';
       render();
@@ -256,6 +292,7 @@
       const filtered = restaurants.filter(r => {
         if (r.deleted) return false;
         if (currentFilter !== 'all' && r.status !== currentFilter) return false;
+        if (currentCity !== 'all' && r.city !== currentCity) return false;
         if (search && !r.name.toLowerCase().includes(search) && !r.area.toLowerCase().includes(search)) return false;
         return true;
       });
@@ -269,7 +306,12 @@
         <div class="stat-box rejected"><div class="num">${stats.rejected}</div><div class="lbl">رفض</div></div>
       `;
 
-      // Filters
+      // City filter
+      const cities = [...new Set(restaurants.filter(r=>!r.deleted).map(r=>r.city))].sort();
+      document.getElementById('cityFilters').innerHTML = `<button class="filter-btn ${currentCity === 'all' ? 'active' : ''}" onclick="setCity('all')">الكل</button>` +
+        cities.map(c => `<button class="filter-btn ${currentCity === c ? 'active' : ''}" onclick="setCity('${c}')">${c}</button>`).join('');
+
+      // Status filter
       const filters = [
         { key: 'all', label: 'الكل' },
         { key: 'pending', label: '⏳ لم يتم' },
@@ -302,7 +344,7 @@
           <div class="num">${i + 1}</div>
           <div class="info">
             <div class="name">${r.name}</div>
-            <div class="meta"><span class="rating">${stars} ${r.rating}</span><span class="dot">·</span>${formatPhone(r.phone)}<span class="dot">·</span>${r.area}</div>
+            <div class="meta"><span class="rating">${stars} ${r.rating}</span><span class="dot">·</span>${formatPhone(r.phone)}<span class="dot">·</span>${r.city}<span class="dot">·</span>${r.area}</div>
           </div>
           <div class="actions">
             ${statusBtns}
@@ -318,6 +360,10 @@
 
     function setFilter(key) {
       currentFilter = key;
+      render();
+    }
+    function setCity(city) {
+      currentCity = city;
       render();
     }
 

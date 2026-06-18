@@ -7,12 +7,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    :root { --primary: #1a1a2e; --accent: #e94560; --whatsapp: #25D366; --bg: #f5f0eb; --card: #fff; --text: #2d2d2d; --muted: #888; --radius: 16px; --header-h: 200px; }
+    :root { --primary: #24244a; --accent: #536dfe; --whatsapp: #25D366; --bg: #f5f0eb; --card: #fff; --text: #2d2d2d; --muted: #888; --radius: 16px; --header-h: 200px; }
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 90px; overflow-x: hidden; }
     .header {
       position: relative; min-height: var(--header-h); display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: linear-gradient(160deg, #0f0c29 0%, #16213e 35%, #1a1a2e 70%, #e94560 100%);
+      background: linear-gradient(160deg, #0a0a1a 0%, #14142e 35%, #24244a 70%, #536dfe 100%);
       color: #fff; padding: 40px 20px 32px; text-align: center; overflow: hidden;
     }
     .header::after {
@@ -162,7 +162,7 @@
   <div class="admin-pwd" id="adminPwd"><div class="admin-pwd-box"><h3>🔐 رقم الدخول</h3><input type="password" id="pwdInput" placeholder="أدخل الرقم السري" onkeydown="if(event.key==='Enter')checkPwd()"><button onclick="checkPwd()">دخول</button></div></div>
   <div class="admin-modal" id="adminModal"><div class="admin-box"><h2>⚙️ إدارة المنيو <button onclick="closeAdmin()">✕</button></h2><div id="adminContent"></div></div></div>
   <script>
-    const store = { id:'mrbroast', name:'مستر بروست | MR.Broast', phone:'966554892026', rating:4.3, city:'المدينة المنورة', area:'بني حارثة — حي النصر', mapsQuery:'مستر+بروست+المدينة+المنورة', desc:'أفضل بروست بلدي — طعم خرافي ونظافة' };
+    const store = { id:'j27', name:'بروست الخالدية', phone:'966567890123', rating:4, city:'جازان', area:'الخالدية', mapsQuery:'بروست+الخالدية+جازان', desc:'بروست الخالدية — طعم مميز' };
     const branches = [
       { name:'الفرع الرئيسي — بني حارثة', area:'شارع الأمير محمد بن عبدالعزيز، أمام الشؤون الصحية', query:'مستر+بروست+بني+حارثة+المدينة' },
       { name:'فرع حي النصر', area:'حي النصر، أمام ثانوية أحد، خلف بوليفارد العروبة', query:'مستر+بروست+حي+النصر+المدينة' },
