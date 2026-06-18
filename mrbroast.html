@@ -208,7 +208,7 @@
         <div id="menuContainer"></div>
         <div class="location-box">
           <h3>📍 الموقع على الخريطة</h3>
-          ${branches.map(b => `<div class="loc-item"><div class="addr"><strong>${b.name}</strong><small>${b.area}</small></div><a href="https://www.google.com/maps/search/${b.query}" target="_blank" class="btn btn-map">📍 خرائط</a></div>`).join('')}
+          ${(branches&&branches.length?branches:[{name:'الفرع الرئيسي',area:store.area+' — '+store.city,query:store.mapsQuery}]).map(b => `<div class="loc-item"><div class="addr"><strong>${b.name}</strong><small>${b.area}</small></div><a href="https://www.google.com/maps/search/${b.query}" target="_blank" class="btn btn-map">📍 خرائط</a></div>`).join('')}
         </div>
         <div class="footer">${store.name} — ${store.city} 2026 · <span style="cursor:pointer" onclick="showPwd()">إدارة</span></div>
       `;
