@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>مستر بروست — طلب أونلاين | المدينة المنورة</title>
+  <title>ظ…ط³طھط± ط¨ط±ظˆط³طھ â€” ط·ظ„ط¨ ط£ظˆظ†ظ„ط§ظٹظ† | ط§ظ„ظ…ط¯ظٹظ†ط© ط§ظ„ظ…ظ†ظˆط±ط©</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
@@ -144,91 +144,68 @@
 <body>
   <div class="header" id="pageHeader">
     <div class="deco"><span></span><span></span><span></span><span></span><span></span></div>
-    <h1 id="storeTitle">تحميل...</h1>
+    <h1 id="storeTitle">طھط­ظ…ظٹظ„...</h1>
     <div class="sub" id="storeSub"></div>
   </div>
   <div class="container" id="pageContent">
-    <div class="loading" id="loadingMsg">جاري تحميل المنيو...</div>
+    <div class="loading" id="loadingMsg">ط¬ط§ط±ظٹ طھط­ظ…ظٹظ„ ط§ظ„ظ…ظ†ظٹظˆ...</div>
   </div>
-  <a class="whatsapp-float" href="#" target="_blank" id="waFloat">💬 واتساب</a>
-  <button class="cart-fab" id="cartFab" onclick="toggleCart()"><span>🛒</span> طلبي <span class="badge" id="cartBadge">0</span></button>
+  <a class="whatsapp-float" href="#" target="_blank" id="waFloat">ًں’¬ ظˆط§طھط³ط§ط¨</a>
+  <button class="cart-fab" id="cartFab" onclick="toggleCart()"><span>ًں›’</span> ط·ظ„ط¨ظٹ <span class="badge" id="cartBadge">0</span></button>
   <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
   <div class="cart-bar" id="cartBar">
     <div class="cart-handle" onclick="toggleCart()"></div>
-    <div class="cart-header"><h3>🛒 طلبي</h3><span class="count" id="cartCount">0 صنف</span><button class="close-cart" onclick="toggleCart()">&times;</button></div>
-    <div class="cart-items" id="cartItems"><div class="cart-empty">السلة فارغة. اختر أصناف من القائمة</div></div>
-    <div class="cart-footer"><div class="cart-total"><span>المجموع</span><span id="cartTotal">0 ر.س</span></div><button class="btn-whatsapp-send" id="sendBtn" onclick="sendOrder()">💬 أرسل الطلب عبر واتساب</button></div>
+    <div class="cart-header"><h3>ًں›’ ط·ظ„ط¨ظٹ</h3><span class="count" id="cartCount">0 طµظ†ظپ</span><button class="close-cart" onclick="toggleCart()">&times;</button></div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty">ط§ظ„ط³ظ„ط© ظپط§ط±ط؛ط©. ط§ط®طھط± ط£طµظ†ط§ظپ ظ…ظ† ط§ظ„ظ‚ط§ط¦ظ…ط©</div></div>
+    <div class="cart-footer"><div class="cart-total"><span>ط§ظ„ظ…ط¬ظ…ظˆط¹</span><span id="cartTotal">0 ط±.ط³</span></div><button class="btn-whatsapp-send" id="sendBtn" onclick="sendOrder()">ًں’¬ ط£ط±ط³ظ„ ط§ظ„ط·ظ„ط¨ ط¹ط¨ط± ظˆط§طھط³ط§ط¨</button></div>
   </div>
-  <div class="admin-pwd" id="adminPwd"><div class="admin-pwd-box"><h3>🔐 رقم الدخول</h3><input type="password" id="pwdInput" placeholder="أدخل الرقم السري" onkeydown="if(event.key==='Enter')checkPwd()"><button onclick="checkPwd()">دخول</button></div></div>
-  <div class="admin-modal" id="adminModal"><div class="admin-box"><h2>⚙️ إدارة المنيو <button onclick="closeAdmin()">✕</button></h2><div id="adminContent"></div></div></div>
+  <div class="admin-pwd" id="adminPwd"><div class="admin-pwd-box"><h3>ًں”گ ط±ظ‚ظ… ط§ظ„ط¯ط®ظˆظ„</h3><input type="password" id="pwdInput" placeholder="ط£ط¯ط®ظ„ ط§ظ„ط±ظ‚ظ… ط§ظ„ط³ط±ظٹ" onkeydown="if(event.key==='Enter')checkPwd()"><button onclick="checkPwd()">ط¯ط®ظˆظ„</button></div></div>
+  <div class="admin-modal" id="adminModal"><div class="admin-box"><h2>âڑ™ï¸ڈ ط¥ط¯ط§ط±ط© ط§ظ„ظ…ظ†ظٹظˆ <button onclick="closeAdmin()">âœ•</button></h2><div id="adminContent"></div></div></div>
   <script>
-    const store = { id:'j1', name:'بروست العربي', phone:'966583386887', rating:4.2, city:'جازان', area:'الأصيلة', mapsQuery:'بروست+العربي+جازان', desc:'بروست عربي بطعم مميز' };
+    const store = { id:'j1', name:'ط¨ط±ظˆط³طھ ط§ظ„ط¹ط±ط¨ظٹ', phone:'966583386887', rating:4.2, city:'ط¬ط§ط²ط§ظ†', area:'ط§ظ„ط£طµظٹظ„ط©', mapsQuery:'ط¨ط±ظˆط³طھ+ط§ظ„ط¹ط±ط¨ظٹ+ط¬ط§ط²ط§ظ†', desc:'ط¨ط±ظˆط³طھ ط¹ط±ط¨ظٹ ط¨ط·ط¹ظ… ظ…ظ…ظٹط²' };
     const branches = [];
-    const catIcons = { 'البروست':'🍗', 'برجر':'🍔', 'ساندويتشات':'🥪' };
+    const catIcons = { 'ط§ظ„ط¨ط±ظˆط³طھ':'ًںچ—', 'ط¨ط±ط¬ط±':'ًںچ”', 'ط³ط§ظ†ط¯ظˆظٹطھط´ط§طھ':'ًں¥ھ' };
     const menuData = [
-      { cat:'البروست', items:[
-        { name:'بروست دجاج 4 قطع', price:24, desc:'دجاج بلدي مقرمش مع بطاطس وخبز وصلصات' },
-        { name:'بروست حار 4 قطع', price:24, desc:'نفس الوصفة مع نكهة حارة' },
+      { cat:'ط§ظ„ط¨ط±ظˆط³طھ', items:[
+        { name:'ط¨ط±ظˆط³طھ ط¯ط¬ط§ط¬ 4 ظ‚ط·ط¹', price:24, desc:'ط¯ط¬ط§ط¬ ط¨ظ„ط¯ظٹ ظ…ظ‚ط±ظ…ط´ ظ…ط¹ ط¨ط·ط§ط·ط³ ظˆط®ط¨ط² ظˆطµظ„طµط§طھ' },
+        { name:'ط¨ط±ظˆط³طھ ط­ط§ط± 4 ظ‚ط·ط¹', price:24, desc:'ظ†ظپط³ ط§ظ„ظˆطµظپط© ظ…ط¹ ظ†ظƒظ‡ط© ط­ط§ط±ط©' },
       ]},
-      { cat:'برجر', items:[
-        { name:'برجر زنجر (عادي)', price:21, desc:'دجاج زنجر طازج، خبز خاص، جبن' },
-        { name:'برجر زنجر (حار)', price:22, desc:'نفس الوصفة مع نكهة حارة' },
-        { name:'دبل زنجر', price:30, desc:'شريحتين زنجر مع جبن' },
-        { name:'برجر لحم كلاسيك', price:27, desc:'لحم بقري مشوي طازج' },
-        { name:'برجر جمبري', price:22, desc:'جمبري مع خبز مميز وجبن' },
+      { cat:'ط¨ط±ط¬ط±', items:[
+        { name:'ط¨ط±ط¬ط± ط²ظ†ط¬ط± (ط¹ط§ط¯ظٹ)', price:21, desc:'ط¯ط¬ط§ط¬ ط²ظ†ط¬ط± ط·ط§ط²ط¬طŒ ط®ط¨ط² ط®ط§طµطŒ ط¬ط¨ظ†' },
+        { name:'ط¨ط±ط¬ط± ط²ظ†ط¬ط± (ط­ط§ط±)', price:22, desc:'ظ†ظپط³ ط§ظ„ظˆطµظپط© ظ…ط¹ ظ†ظƒظ‡ط© ط­ط§ط±ط©' },
+        { name:'ط¯ط¨ظ„ ط²ظ†ط¬ط±', price:30, desc:'ط´ط±ظٹط­طھظٹظ† ط²ظ†ط¬ط± ظ…ط¹ ط¬ط¨ظ†' },
+        { name:'ط¨ط±ط¬ط± ظ„ط­ظ… ظƒظ„ط§ط³ظٹظƒ', price:27, desc:'ظ„ط­ظ… ط¨ظ‚ط±ظٹ ظ…ط´ظˆظٹ ط·ط§ط²ط¬' },
+        { name:'ط¨ط±ط¬ط± ط¬ظ…ط¨ط±ظٹ', price:22, desc:'ط¬ظ…ط¨ط±ظٹ ظ…ط¹ ط®ط¨ط² ظ…ظ…ظٹط² ظˆط¬ط¨ظ†' },
       ]},
-      { cat:'ساندويتشات', items:[
-        { name:'كنج دجاج', price:16, desc:'دجاج في صامولي مع بطاطس' },
-        { name:'كنج زنجر', price:21, desc:'زنجر في صامولي' },
-        { name:'ساندويتش دجاج', price:9, desc:'دجاج في خبز شامي' },
-        { name:'ساندويتش زنجر', price:11, desc:'زنجر في خبز شامي' },
+      { cat:'ط³ط§ظ†ط¯ظˆظٹطھط´ط§طھ', items:[
+        { name:'ظƒظ†ط¬ ط¯ط¬ط§ط¬', price:16, desc:'ط¯ط¬ط§ط¬ ظپظٹ طµط§ظ…ظˆظ„ظٹ ظ…ط¹ ط¨ط·ط§ط·ط³' },
+        { name:'ظƒظ†ط¬ ط²ظ†ط¬ط±', price:21, desc:'ط²ظ†ط¬ط± ظپظٹ طµط§ظ…ظˆظ„ظٹ' },
+        { name:'ط³ط§ظ†ط¯ظˆظٹطھط´ ط¯ط¬ط§ط¬', price:9, desc:'ط¯ط¬ط§ط¬ ظپظٹ ط®ط¨ط² ط´ط§ظ…ظٹ' },
+        { name:'ط³ط§ظ†ط¯ظˆظٹطھط´ ط²ظ†ط¬ط±', price:11, desc:'ط²ظ†ط¬ط± ظپظٹ ط®ط¨ط² ط´ط§ظ…ظٹ' },
       ]},
     ];
     let cart = {};
     function fmtPhone(p) { if (p?.startsWith('966')) return '0' + p.slice(3); return p||''; }
-    function getStars(r) { const f = Math.floor(r), h = r - f >= 0.5 ? 1 : 0; return '★'.repeat(f) + (h ? '½' : '') + '☆'.repeat(Math.max(0,5-f-h)); }
+    function getStars(r) { const f = Math.floor(r), h = r - f >= 0.5 ? 1 : 0; return 'âک…'.repeat(f) + (h ? 'آ½' : '') + 'âک†'.repeat(Math.max(0,5-f-h)); }
     function init() {
       const saved = localStorage.getItem('menuEdit_mrbroast'); if(saved){try{const d=JSON.parse(saved);menuData.length=0;menuData.push(...d)}catch(e){}}
-      document.title = store.name + ' — طلب أونلاين | ' + store.city;
+      document.title = store.name + ' â€” ط·ظ„ط¨ ط£ظˆظ†ظ„ط§ظٹظ† | ' + store.city;
       document.getElementById('storeTitle').textContent = store.name;
-      document.getElementById('storeSub').textContent = store.desc || 'بروست طازج — خدمة سريعة';
+      document.getElementById('storeSub').textContent = store.desc || 'ط¨ط±ظˆط³طھ ط·ط§ط²ط¬ â€” ط®ط¯ظ…ط© ط³ط±ظٹط¹ط©';
       const c = document.getElementById('pageContent'), stars = getStars(store.rating);
       c.innerHTML = `
         <div class="top-bar">
-          <div><div class="rating">${stars} <small>التقييم العام ${store.rating}</small></div></div>
+          <div><div class="rating">${stars} <small>ط§ظ„طھظ‚ظٹظٹظ… ط§ظ„ط¹ط§ظ… ${store.rating}</small></div></div>
           <div class="stats">
-            <span><strong>${fmtPhone(store.phone)}</strong> للطلب</span>
+            <span><strong>${fmtPhone(store.phone)}</strong> ظ„ظ„ط·ظ„ط¨</span>
             <span><strong>${store.area}</strong></span>
           </div>
         </div>
-        <h2 class="section-title">🍽️ قائمة الطعام</h2>
+        <h2 class="section-title">ًںچ½ï¸ڈ ظ‚ط§ط¦ظ…ط© ط§ظ„ط·ط¹ط§ظ…</h2>
         <div id="menuContainer"></div>
         <div class="location-box">
-          <h3>📍 الموقع على الخريطة</h3>
-          ${branches.map(b => `<div class="loc-item"><div class="addr"><strong>${b.name}</strong><small>${b.area}</small></div><a href="https://www.google.com/maps/search/${b.query}" target="_blank" class="btn btn-map">📍 خرائط</a></div>`).join('')}
-        </div>
-        <div class="footer">${store.name} — ${store.city} 2026 · <span style="cursor:pointer" onclick="showPwd()">إدارة</span></div>
-      `;
-      renderMenu();
-    }
-    function renderMenu() {
-      document.getElementById('menuContainer').innerHTML = menuData.map(cat => `
-        <div class="cat-label"><span class="emoji-icon">${catIcons[cat.cat]||'🍽️'}</span> ${cat.cat}</div>
-        <div class="menu-grid">
-          ${cat.items.map(item => `
-            <div class="menu-item" data-name="${item.name}" data-price="${item.price}">
-              <div class="info">
-                <div class="name">${item.name}</div>
-                ${item.desc ? '<div class="desc">' + item.desc + '</div>' : ''}
-              </div>
-              <div class="price">${item.price} ر.س</div>
-              <div class="qty-controls">
-                <button class="qty-btn qty-minus" onclick="updateQty(this,-1)">−</button>
-                <span class="qty-value zero">0</span>
-                <button class="qty-btn qty-plus" onclick="updateQty(this,1)">+</button>
-              </div>
-            </div>
-          `).join('')}
+          <h3>ًں“چ ط§ظ„ظ…ظˆظ‚ط¹ ط¹ظ„ظ‰ ط§ظ„ط®ط±ظٹط·ط©</h3>
+          ${(branches&&branches.length?branches:[{name:'الفرع الرئيسي',area:store.area+' — '+store.city,query:store.mapsQuery}]).map(b => `<div class="loc-item"><div class="addr"><strong>${b.name}</strong><small>${b.area}</small></div><a href="https://www.google.com/maps/search/${b.query}" target="_blank" class="btn btn-map">📍 خرائط</a></div>`).join('')}
         </div>
       `).join('');
     }
@@ -242,25 +219,25 @@
     function renderCart() {
       const items = document.getElementById('cartItems'), count = document.getElementById('cartCount'), total = document.getElementById('cartTotal'), badge = document.getElementById('cartBadge'), fab = document.getElementById('cartFab'), sendBtn = document.getElementById('sendBtn');
       const vals = Object.values(cart), ic = vals.reduce((s,i) => s+i.qty, 0), sum = vals.reduce((s,i) => s+i.price*i.qty, 0);
-      badge.textContent = ic; count.textContent = ic + ' صنف'; total.textContent = sum + ' ر.س';
+      badge.textContent = ic; count.textContent = ic + ' طµظ†ظپ'; total.textContent = sum + ' ط±.ط³';
       fab.style.display = ic > 0 ? 'flex' : 'none'; sendBtn.disabled = ic === 0;
-      if (ic === 0) { items.innerHTML = '<div class="cart-empty">السلة فارغة. اختر أصناف من القائمة</div>'; if (document.getElementById('cartBar').classList.contains('open')) toggleCart(); return; }
-      items.innerHTML = vals.map(i => '<div class="cart-item"><span class="ci-name">' + i.name + '</span><span class="ci-qty">×' + i.qty + '</span><span class="ci-price">' + (i.price*i.qty) + ' ر.س</span><button class="ci-remove" onclick="removeItem(\'' + i.name.replace(/'/g, "\\'") + '\')">✕</button></div>').join('');
+      if (ic === 0) { items.innerHTML = '<div class="cart-empty">ط§ظ„ط³ظ„ط© ظپط§ط±ط؛ط©. ط§ط®طھط± ط£طµظ†ط§ظپ ظ…ظ† ط§ظ„ظ‚ط§ط¦ظ…ط©</div>'; if (document.getElementById('cartBar').classList.contains('open')) toggleCart(); return; }
+      items.innerHTML = vals.map(i => '<div class="cart-item"><span class="ci-name">' + i.name + '</span><span class="ci-qty">أ—' + i.qty + '</span><span class="ci-price">' + (i.price*i.qty) + ' ط±.ط³</span><button class="ci-remove" onclick="removeItem(\'' + i.name.replace(/'/g, "\\'") + '\')">âœ•</button></div>').join('');
     }
     function removeItem(name) { delete cart[name]; document.querySelectorAll('.menu-item').forEach(el => { if (el.dataset.name === name) { const v = el.querySelector('.qty-value'); v.textContent = '0'; v.classList.add('zero'); } }); renderCart(); }
     function toggleCart() { const bar = document.getElementById('cartBar'), overlay = document.getElementById('cartOverlay'), isOpen = bar.classList.toggle('open'); overlay.classList.toggle('open', isOpen); document.body.style.overflow = isOpen && Object.keys(cart).length > 0 ? 'hidden' : ''; }
-    function sendOrder() { const vals = Object.values(cart); if (vals.length === 0) return; const lines = vals.map(i => '• ' + i.name + ' × ' + i.qty + ' = ' + (i.price*i.qty) + ' ر.س'); const total = vals.reduce((s,i) => s+i.price*i.qty, 0); const msg = '🍗 طلب جديد من ' + store.name + '\n------------------\n' + lines.join('\n') + '\n------------------\n💰 المجموع: ' + total + ' ر.س\n\n📍 الرجاء تأكيد الطلب'; window.open('https://wa.me/' + store.phone + '?text=' + encodeURIComponent(msg), '_blank'); }
+    function sendOrder() { const vals = Object.values(cart); if (vals.length === 0) return; const lines = vals.map(i => 'â€¢ ' + i.name + ' أ— ' + i.qty + ' = ' + (i.price*i.qty) + ' ط±.ط³'); const total = vals.reduce((s,i) => s+i.price*i.qty, 0); const msg = 'ًںچ— ط·ظ„ط¨ ط¬ط¯ظٹط¯ ظ…ظ† ' + store.name + '\n------------------\n' + lines.join('\n') + '\n------------------\nًں’° ط§ظ„ظ…ط¬ظ…ظˆط¹: ' + total + ' ط±.ط³\n\nًں“چ ط§ظ„ط±ط¬ط§ط، طھط£ظƒظٹط¯ ط§ظ„ط·ظ„ط¨'; window.open('https://wa.me/' + store.phone + '?text=' + encodeURIComponent(msg), '_blank'); }
     let _ed=[];function showPwd(){let d=document.getElementById('adminPwd');d.classList.add('open');document.getElementById('pwdInput').value='';setTimeout(()=>document.getElementById('pwdInput').focus(),100)}
-    function checkPwd(){if(document.getElementById('pwdInput').value==='1122'){document.getElementById('adminPwd').classList.remove('open');openAdmin()}else alert('❌ رقم سري خطأ')}
+    function checkPwd(){if(document.getElementById('pwdInput').value==='1122'){document.getElementById('adminPwd').classList.remove('open');openAdmin()}else alert('â‌Œ ط±ظ‚ظ… ط³ط±ظٹ ط®ط·ط£')}
     function openAdmin(){let s=localStorage.getItem('menuEdit_mrbroast');_ed=s?JSON.parse(s):JSON.parse(JSON.stringify(menuData));document.getElementById('adminModal').classList.add('open');rAdm()}
     function closeAdmin(){document.getElementById('adminModal').classList.remove('open')}
-    function rAdm(){let h=_ed.map((c,ci)=>'<div class="admin-cat"><h3><input value="'+c.cat+'" onchange="_ed['+ci+'].cat=this.value" style="font-family:inherit;padding:3px 6px;border:1px solid #ddd;border-radius:5px;font-size:.82em;flex:1"><button class="admin-btn admin-del" onclick="dC('+ci+')">✕</button></h3>'+c.items.map((it,ii)=>'<div class="admin-itm"><input class="an" value="'+it.name+'" onchange="_ed['+ci+'].items['+ii+'].name=this.value"><input class="ap" type="number" value="'+it.price+'" onchange="_ed['+ci+'].items['+ii+'].price=Number(this.value)" min="1"><button class="admin-btn admin-del" onclick="dI('+ci+','+ii+')">✕</button></div>').join('')+'<button class="admin-btn admin-add" onclick="aI('+ci+')" style="margin-top:4px">+إضافة صنف</button></div>').join('');h+='<button class="admin-btn admin-add" onclick="aC()" style="width:100%;padding:8px;margin-bottom:6px">+إضافة قسم</button>';h+='<button class="admin-save" onclick="sAv()">💾 حفظ التغييرات</button>';h+='<button class="admin-reset" onclick="rSt()">🔄 استعادة المنيو الافتراضي</button>';document.getElementById('adminContent').innerHTML=h}
-    function dC(ci){if(confirm('حذف القسم؟')){_ed.splice(ci,1);rAdm()}}
+    function rAdm(){let h=_ed.map((c,ci)=>'<div class="admin-cat"><h3><input value="'+c.cat+'" onchange="_ed['+ci+'].cat=this.value" style="font-family:inherit;padding:3px 6px;border:1px solid #ddd;border-radius:5px;font-size:.82em;flex:1"><button class="admin-btn admin-del" onclick="dC('+ci+')">âœ•</button></h3>'+c.items.map((it,ii)=>'<div class="admin-itm"><input class="an" value="'+it.name+'" onchange="_ed['+ci+'].items['+ii+'].name=this.value"><input class="ap" type="number" value="'+it.price+'" onchange="_ed['+ci+'].items['+ii+'].price=Number(this.value)" min="1"><button class="admin-btn admin-del" onclick="dI('+ci+','+ii+')">âœ•</button></div>').join('')+'<button class="admin-btn admin-add" onclick="aI('+ci+')" style="margin-top:4px">+ط¥ط¶ط§ظپط© طµظ†ظپ</button></div>').join('');h+='<button class="admin-btn admin-add" onclick="aC()" style="width:100%;padding:8px;margin-bottom:6px">+ط¥ط¶ط§ظپط© ظ‚ط³ظ…</button>';h+='<button class="admin-save" onclick="sAv()">ًں’¾ ط­ظپط¸ ط§ظ„طھط؛ظٹظٹط±ط§طھ</button>';h+='<button class="admin-reset" onclick="rSt()">ًں”„ ط§ط³طھط¹ط§ط¯ط© ط§ظ„ظ…ظ†ظٹظˆ ط§ظ„ط§ظپطھط±ط§ط¶ظٹ</button>';document.getElementById('adminContent').innerHTML=h}
+    function dC(ci){if(confirm('ط­ط°ظپ ط§ظ„ظ‚ط³ظ…طں')){_ed.splice(ci,1);rAdm()}}
     function dI(ci,ii){_ed[ci].items.splice(ii,1);rAdm()}
-    function aI(ci){_ed[ci].items.push({name:'جديد',price:10,desc:''});rAdm()}
-    function aC(){_ed.push({cat:'قسم جديد',items:[{name:'جديد',price:10,desc:''}]});rAdm()}
+    function aI(ci){_ed[ci].items.push({name:'ط¬ط¯ظٹط¯',price:10,desc:''});rAdm()}
+    function aC(){_ed.push({cat:'ظ‚ط³ظ… ط¬ط¯ظٹط¯',items:[{name:'ط¬ط¯ظٹط¯',price:10,desc:''}]});rAdm()}
     function sAv(){localStorage.setItem('menuEdit_mrbroast',JSON.stringify(_ed));menuData.length=0;menuData.push(..._ed);renderMenu();closeAdmin()}
-    function rSt(){if(confirm('استعادة المنيو الافتراضي؟')){localStorage.removeItem('menuEdit_mrbroast');location.reload()}}
+    function rSt(){if(confirm('ط§ط³طھط¹ط§ط¯ط© ط§ظ„ظ…ظ†ظٹظˆ ط§ظ„ط§ظپطھط±ط§ط¶ظٹطں')){localStorage.removeItem('menuEdit_mrbroast');location.reload()}}
     init();
   
   (function(){
@@ -268,7 +245,7 @@
     var link = base + store.id + '.html';
     var msg = localStorage.getItem('broastWaMsg');
     if (!msg) {
-      msg = 'مرحباً {name}،\n\nنقدم لكم إنشاء صفحة هبوط إلكترونية لمطعمكم بمنيو تفاعلي وسلة طلب وواتساب مباشر ولوحة تحكم، بسعر 100 ريال فقط!\nشاهد المثال الحي: {link}\nجربوا لوحة التحكم: اضغط "إدارة" في أسفل الصفحة وأدخل 1122.';
+      msg = 'ظ…ط±ط­ط¨ط§ظ‹ {name}طŒ\n\nظ†ظ‚ط¯ظ… ظ„ظƒظ… ط¥ظ†ط´ط§ط، طµظپط­ط© ظ‡ط¨ظˆط· ط¥ظ„ظƒطھط±ظˆظ†ظٹط© ظ„ظ…ط·ط¹ظ…ظƒظ… ط¨ظ…ظ†ظٹظˆ طھظپط§ط¹ظ„ظٹ ظˆط³ظ„ط© ط·ظ„ط¨ ظˆظˆط§طھط³ط§ط¨ ظ…ط¨ط§ط´ط± ظˆظ„ظˆط­ط© طھط­ظƒظ…طŒ ط¨ط³ط¹ط± 100 ط±ظٹط§ظ„ ظپظ‚ط·!\nط´ط§ظ‡ط¯ ط§ظ„ظ…ط«ط§ظ„ ط§ظ„ط­ظٹ: {link}\nط¬ط±ط¨ظˆط§ ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ…: ط§ط¶ط؛ط· "ط¥ط¯ط§ط±ط©" ظپظٹ ط£ط³ظپظ„ ط§ظ„طµظپط­ط© ظˆط£ط¯ط®ظ„ 1122.';
     }
     var finalMsg = msg.replace(/{name}/g, store.name).replace(/{link}/g, link);
     document.querySelector('.whatsapp-float').href = 'https://wa.me/' + store.phone + '?text=' + encodeURIComponent(finalMsg);
